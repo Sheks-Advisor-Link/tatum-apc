@@ -10,6 +10,7 @@ UCT APC Professional Programme, 2026.
 | **[`apc-playbook.html`](apc-playbook.html)** | The method and exam technique on one page: the marking standard, the five-day pre-release process, the day plan, the answering approach, task-type playbooks, writing formats, and what markers penalise. Print it for the exam file. |
 | **[`apc-2026-august-qe-diamante.html`](apc-2026-august-qe-diamante.html)** | Worked answers to all eight tasks of the 2026 1st Qualifying Exam (Diamante Ltd), each preceded by a short note on how the task should have been read and planned, and followed by the marking standard the examiners applied. |
 | **[`index.html`](index.html)** | Clairmont Capital (SAICA December 2025 pre-release) — Week 6 & 7 foundation phase tasks, with the source documents and full responses. |
+| **[`templates/APC-Prerelease-Triggers-BLANK.docx`](templates/APC-Prerelease-Triggers-BLANK.docx)** | Blank pre-release trigger list — the page-by-page grid (Pg / Section / Main triggers / Subject area) to fill in during the five-day pre-release period, plus a reference page of the discipline lenses to sweep each trigger through. |
 | `.claude/skills/apc/` | The same method in skill form, for use with Claude Code. `SKILL.md` plus five reference files: method, marker feedback, writing formats, technical checklists by discipline, and case history. |
 | `CLAUDE.md` | Repository context and working rules. |
 
