@@ -12,6 +12,7 @@ research and exam technique.
 - Programme sequence: weekly competency development → **June mock** → **1st Qualifying
   Exam (August)** → **2nd Qualifying Exam (October)** → SAICA APC.
 - Exams sat so far: June 2026 mock (Fishies Ltd), August 2026 1st QE (Diamante Ltd).
+- September 2026 2nd QE: **Axion Digital Infrastructure (Pty) Ltd** — data centres. Pre-release issued 18 September 2026; role is Financial Analyst reporting to Sarah Naidoo CA(SA), CFO.
 - Next: the **September / 2nd Qualifying Exam**. All work should be oriented towards it.
 
 ## What is in here
@@ -21,6 +22,7 @@ research and exam technique.
 | `index.html` | Clairmont Capital (Dec 2025 pre-release) — Week 6 & 7 foundation phase answers |
 | `apc-2026-august-qe-diamante.html` | Worked answers to all eight tasks of the August 2026 1st QE |
 | `apc-playbook.html` | The method, on one readable page: pre-release period, day plan, answering approach, formats |
+| `APC-2026-September-Axion-Pre-release-Triggers.docx` | September QE (Axion) trigger list and group research plan |
 | `templates/APC-Prerelease-Triggers-BLANK.docx` | Blank pre-release trigger list, page-by-page grid |
 | `.claude/skills/apc/` | The same knowledge in skill form — invoke with `/apc` |
 
