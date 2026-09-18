@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>APC Playbook — method, technique and marker calibration</title>
+<style>
+  :root{
+    --navy:#0b2545;
+    --blue:#13315c;
+    --accent:#1e6091;
+    --soft:#e8f0f7;
+    --border:#d5dee8;
+    --ok:#1b7a3a;
+    --warn:#b8860b;
+    --bad:#b00020;
+    --muted:#5c6b7a;
+    --bg:#f6f8fb;
+    --card:#ffffff;
+    --code:#f1f5f9;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,sans-serif;
+    background:var(--bg);
+    color:#1a1a1a;
+    line-height:1.6;
+  }
+  header{
+    background:linear-gradient(135deg,var(--navy),var(--accent));
+    color:white;
+    padding:32px 40px;
+    position:sticky;
+    top:0;
+    z-index:100;
+    box-shadow:0 2px 10px rgba(0,0,0,.15);
+  }
+  header h1{margin:0;font-size:22px;font-weight:600;letter-spacing:.3px}
+  header .subtitle{font-size:13px;opacity:.85;margin-top:4px}
+  .layout{display:grid;grid-template-columns:300px 1fr;max-width:1500px;margin:0 auto}
+  nav.toc{
+    position:sticky;
+    top:96px;
+    align-self:start;
+    padding:24px 16px;
+    max-height:calc(100vh - 96px);
+    overflow-y:auto;
+    border-right:1px solid var(--border);
+    background:white;
+  }
+  nav.toc h3{font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin:0 0 12px}
+  nav.toc ul{list-style:none;padding:0;margin:0 0 20px}
+  nav.toc li{margin:2px 0}
+  nav.toc a{
+    display:block;
+    padding:6px 10px;
+    color:#334155;
+    text-decoration:none;
+    font-size:13px;
+    border-radius:4px;
+    border-left:3px solid transparent;
+  }
+  nav.toc a:hover{background:var(--soft);color:var(--navy)}
+  nav.toc a.section{font-weight:600;color:var(--navy)}
+  nav.toc a.sub{padding-left:22px;font-size:12.5px;color:var(--muted)}
+  main{padding:40px 48px;max-width:100%}
+  h2{
+    font-size:22px;
+    color:var(--navy);
+    border-bottom:3px solid var(--accent);
+    padding-bottom:8px;
+    margin-top:0;
+  }
+  h3{font-size:17px;color:var(--blue);margin-top:28px}
+  h4{font-size:15px;color:var(--blue);margin-top:20px;margin-bottom:8px}
+  .card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:24px 28px;
+    margin-bottom:24px;
+    box-shadow:0 1px 3px rgba(0,0,0,.04);
+  }
+  .meta{
+    background:var(--soft);
+    border-left:4px solid var(--accent);
+    padding:12px 16px;
+    font-size:13.5px;
+    border-radius:4px;
+    margin-bottom:20px;
+  }
+  .meta div{margin:2px 0}
+  details{
+    border:1px solid var(--border);
+    border-radius:8px;
+    margin:10px 0;
+    background:#fafbfc;
+    overflow:hidden;
+  }
+  details[open]{background:white}
+  summary{
+    cursor:pointer;
+    padding:12px 16px;
+    font-weight:600;
+    color:var(--navy);
+    list-style:none;
+    user-select:none;
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  summary::-webkit-details-marker{display:none}
+  summary::before{
+    content:"▸";
+    color:var(--accent);
+    font-size:14px;
+    transition:transform .2s;
+  }
+  details[open] > summary::before{transform:rotate(90deg)}
+  details .inner{padding:4px 18px 16px 40px}
+  table{
+    width:100%;
+    border-collapse:collapse;
+    margin:14px 0;
+    font-size:13.5px;
+    background:white;
+  }
+  th,td{
+    border:1px solid var(--border);
+    padding:8px 10px;
+    text-align:left;
+    vertical-align:top;
+  }
+  th{background:var(--soft);color:var(--navy);font-weight:600}
+  td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+  .pill{
+    display:inline-block;
+    padding:2px 10px;
+    border-radius:999px;
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:.5px;
+    text-transform:uppercase;
+  }
+  .pill.agree{background:#dcfce7;color:var(--ok)}
+  .pill.disagree{background:#fee2e2;color:var(--bad)}
+  .pill.partial{background:#fef3c7;color:var(--warn)}
+  .pill.info{background:#dbeafe;color:#1e40af}
+  .pill.doc{background:#e0e7ff;color:#3730a3}
+  pre.journal{
+    background:var(--code);
+    border-left:4px solid var(--accent);
+    padding:12px 14px;
+    font-family:"SF Mono",Menlo,Consolas,monospace;
+    font-size:13px;
+    overflow-x:auto;
+    border-radius:4px;
+    margin:10px 0;
+    white-space:pre;
+  }
+  .callout{
+    border-radius:8px;
+    padding:12px 16px;
+    margin:14px 0;
+    font-size:14px;
+  }
+  .callout.warn{background:#fffbea;border-left:4px solid var(--warn)}
+  .callout.danger{background:#fef2f2;border-left:4px solid var(--bad)}
+  .callout.info{background:#eff6ff;border-left:4px solid #1e40af}
+  .callout.success{background:#f0fdf4;border-left:4px solid var(--ok)}
+  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media (max-width:900px){
+    .layout{grid-template-columns:1fr}
+    nav.toc{position:static;max-height:none;border-right:none;border-bottom:1px solid var(--border)}
+    main{padding:24px}
+    .two-col{grid-template-columns:1fr}
+  }
+  footer{
+    padding:24px 40px;
+    text-align:center;
+    font-size:12px;
+    color:var(--muted);
+    border-top:1px solid var(--border);
+    background:white;
+  }
+  .tag{display:inline-block;background:var(--soft);color:var(--navy);padding:2px 8px;border-radius:4px;font-size:11px;margin:2px;font-weight:600}
+  .controls{
+    display:flex;
+    gap:8px;
+    margin-bottom:16px;
+    flex-wrap:wrap;
+  }
+  .controls button{
+    background:white;
+    border:1px solid var(--border);
+    color:var(--navy);
+    padding:6px 14px;
+    border-radius:6px;
+    cursor:pointer;
+    font-size:12.5px;
+    font-weight:600;
+  }
+  .controls button:hover{background:var(--soft);border-color:var(--accent)}
+  .controls button.active{background:var(--accent);color:white;border-color:var(--accent)}
+  @media print{
+    header,nav.toc,.controls,.tab-buttons{display:none}
+    .layout{grid-template-columns:1fr}
+    main{padding:0}
+    .card{box-shadow:none;break-inside:avoid}
+    details{break-inside:avoid}
+    details > .inner{display:block !important}
+    details > summary::before{content:""}
+    .tab-content{display:block !important}
+  }
+  ul.clean{margin:6px 0;padding-left:20px}
+  ul.clean li{margin:4px 0}
+  .ref-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;margin-top:14px}
+  .ref-box{background:var(--soft);border-radius:6px;padding:12px 14px;font-size:13px}
+  .ref-box h5{margin:0 0 6px;color:var(--navy);font-size:13px}
+  .ref-box ul{margin:0;padding-left:18px}
+  .ref-box li{margin:3px 0}
+  .note{font-size:12.5px;color:var(--muted);font-style:italic}
+  .email-box{
+    background:#fdfdfd;
+    border:1px solid var(--border);
+    border-radius:8px;
+    padding:18px 22px;
+    margin:14px 0;
+  }
+  .email-header{
+    border-bottom:1px solid var(--border);
+    padding-bottom:10px;
+    margin-bottom:12px;
+    font-size:13px;
+  }
+  .email-header div{margin:2px 0}
+  .email-header strong{display:inline-block;min-width:80px;color:var(--muted)}
+  .doc-label{
+    display:inline-block;
+    background:var(--navy);
+    color:white;
+    padding:4px 12px;
+    border-radius:4px;
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:1px;
+    margin-right:10px;
+  }
+  .tab-buttons{
+    display:flex;
+    gap:4px;
+    margin-bottom:16px;
+    border-bottom:2px solid var(--border);
+    flex-wrap:wrap;
+  }
+  .tab-buttons button{
+    background:transparent;
+    border:none;
+    padding:10px 16px;
+    cursor:pointer;
+    font-size:13px;
+    font-weight:600;
+    color:var(--muted);
+    border-bottom:3px solid transparent;
+    margin-bottom:-2px;
+  }
+  .tab-buttons button.active{color:var(--accent);border-bottom-color:var(--accent)}
+  .tab-content{display:none}
+  .tab-content.active{display:block}
+  .highlight-box{
+    background:#fff9e6;
+    border:1px solid #f3d573;
+    border-radius:6px;
+    padding:10px 14px;
+    margin:10px 0;
+    font-size:13.5px;
+  }
+  .pill.easy{background:#dcfce7;color:var(--ok)}
+  .pill.med{background:#fef3c7;color:var(--warn)}
+  .pill.hard{background:#fee2e2;color:var(--bad)}
+  .step{border-left:4px solid var(--accent);background:#fff;border:1px solid var(--border);border-radius:8px;padding:16px 20px;margin:14px 0}
+  .step h4{margin-top:0}
+  .checklist{list-style:none;padding-left:0}
+  .checklist li{margin:7px 0;padding-left:26px;position:relative}
+  .checklist li:before{content:"☐";position:absolute;left:0;color:var(--accent);font-size:15px}
+  .bignum{display:inline-block;width:26px;height:26px;line-height:26px;text-align:center;border-radius:50%;background:var(--accent);color:#fff;font-weight:700;font-size:13px;margin-right:8px}
+  .donot{background:#fef2f2;border-left:4px solid var(--bad);border-radius:6px;padding:12px 16px;margin:10px 0;font-size:14px}
+  .do{background:#f0fdf4;border-left:4px solid var(--ok);border-radius:6px;padding:12px 16px;margin:10px 0;font-size:14px}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>APC Playbook</h1>
+  <div class="subtitle">The UCT case study method, exam technique, and what markers actually reward — print this for your file</div>
+</header>
+
+<div class="layout">
+  <nav class="toc">
+    <h3>Contents</h3>
+    <ul>
+      <li><a href="#standard" class="section">The marking standard</a></li>
+      <li><a href="#prerelease" class="section">Pre-release period</a></li>
+      <li><a href="#s1" class="sub">1 · Business &amp; industry</a></li>
+      <li><a href="#s2" class="sub">2 · Identify triggers</a></li>
+      <li><a href="#s3" class="sub">3 · Unpack across disciplines</a></li>
+      <li><a href="#s4" class="sub">4 · Research &amp; what-if</a></li>
+      <li><a href="#s5" class="sub">5 · Study &amp; build the file</a></li>
+      <li><a href="#iod" class="section">Information on the day</a></li>
+      <li><a href="#timeplan" class="section">The day plan</a></li>
+      <li><a href="#answering" class="section">Answering approach</a></li>
+      <li><a href="#tasktypes" class="section">Task-type playbooks</a></li>
+      <li><a href="#ethics" class="sub">Ethics</a></li>
+      <li><a href="#review" class="sub">Reviewing work</a></li>
+      <li><a href="#openended" class="sub">Open-ended</a></li>
+      <li><a href="#controls" class="sub">Internal control</a></li>
+      <li><a href="#audit" class="sub">Audit procedures</a></li>
+      <li><a href="#relevant" class="sub">Relevant costing</a></li>
+      <li><a href="#formats" class="section">Writing formats</a></li>
+      <li><a href="#penalties" class="section">What loses grades</a></li>
+      <li><a href="#final" class="section">Final check</a></li>
+    </ul>
+  </nav>
+  <main>
+    <div class="controls">
+      <button onclick="window.print()">Print / Save as PDF</button>
+    </div>
+    <section id="standard" class="card">
+      <h2>The marking standard</h2>
+      <p>There are no marks. Two trained markers independently grade each task and must reach consensus if they differ. You pass by being assessed <strong>Competent overall</strong>, which is a <em>profile</em> of task grades — not a percentage.</p>
+      <table>
+        <thead><tr><th style="width:16%">Grade</th><th>What it means</th><th style="width:14%">Pass?</th></tr></thead>
+        <tbody>
+          <tr><td><strong>HC</strong> Highly competent</td><td>Great answer. No major faults.</td><td>Yes</td></tr>
+          <tr><td><strong>C</strong> Competent</td><td>Good answer. <em>Useful.</em> Would be complimented on. Could be improved.</td><td>Yes</td></tr>
+          <tr><td><strong>BC</strong> Borderline</td><td>Not currently useful — but could become useful if certain improvements were made.</td><td><strong>No</strong></td></tr>
+          <tr><td><strong>LC</strong> Limited competence</td><td>Missed the boat. The task would have to be re-performed.</td><td>No</td></tr>
+          <tr><td><strong>NA</strong> No attempt</td><td>Viewed very negatively — a competent person gets through their work.</td><td>No</td></tr>
+        </tbody>
+      </table>
+      <div class="callout info"><strong>A Competent answer does not have to be a perfect answer.</strong> It has to be <em>useful to the person who asked for it</em>, and it has to deal sufficiently with the core competencies being assessed in that task. That is a much lower bar than "complete and correct" — and a much higher bar than "I wrote a lot about the right topic".</div>
+      <p>On a seven-task paper, roughly four C's is usually sufficient. Four C's alongside three LC's goes to borderline review, where the technical tasks — financial reporting above all — carry the most weight. Getting through all the tasks matters more than perfecting any one of them: a No Attempt almost always sinks the overall result.</p>
+    </section>
+
+    <section id="prerelease" class="card">
+      <h2>The pre-release period — five days</h2>
+      <div class="callout danger"><strong>What the pre-release is not.</strong> It is not an opportunity to draft answers to the tasks you think are coming. You cannot answer a single past APC task from the pre-release alone — every task depends on instructions given on the day. Candidates who arrive with pre-prepared answers and try to force them onto the actual task are the ones who fail.</div>
+      <p>It exists to give you a holistic view of the business and a list of technical areas to research. Your goal by Tuesday night is to <em>believe you work there</em>, and to know every triggered technical area well enough to explain it to a colleague without opening your file.</p>
+
+      <div class="step" id="s1">
+        <h4><span class="bignum">1</span>Understand the business and industry</h4>
+        <p>Read the whole pack once or twice simply to understand it — every word, every attachment, every hyperlink. Follow any reference to a real company or source; it was put there deliberately. Then answer:</p>
+        <ul class="clean">
+          <li>What is unique about this company? What is its strategy, business model and income streams? What market segment does it target?</li>
+          <li>How is it doing financially? Run the ratios — liquidity, leverage, profitability, efficiency, working capital cycle, Du Pont. Look for significant movements and differences from industry norms, not every line item.</li>
+          <li>Where is it in the business life cycle — start-up, expanding, cash cow, declining, distressed? Each stage has its own risks and decisions, and your recommendations must fit the stage.</li>
+          <li>Who are the people? Roles, qualifications, experience, reporting lines. You will be writing to them.</li>
+          <li>What governance structures exist? Board composition, independence, committees. Appropriate for a company of this size and type?</li>
+          <li>Who are the stakeholders, and is the company dependent on any of them?</li>
+          <li>What decisions must be made within the timeframe of the case?</li>
+        </ul>
+        <p>Supplement with your own research: industry reading, video, and the integrated reports of comparable JSE-listed companies. Read the chairman's report for the external environment and governance, the CEO's for operations. Summarise with a SWOT or Porter's Five Forces.</p>
+        <p class="note">Don't over-invest here. In the exam you only get credit for points about <em>this</em> business, not the industry at large.</p>
+      </div>
+
+      <div class="step" id="s2">
+        <h4><span class="bignum">2</span>Identify the triggers</h4>
+        <p>A trigger is an event, transaction, circumstance or issue requiring professional consideration. Build a complete list, then rank it by how clear each trigger is and how many pieces of information point to it. Look for:</p>
+        <table>
+          <thead><tr><th style="width:24%">Signal</th><th>What it looks like</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Content</strong></td><td>Any reference to a section of legislation, an accounting or auditing standard. Always a strong trigger.</td></tr>
+            <tr><td><strong>Scoping</strong></td><td>"I'm interested in the financial reporting consequences — don't worry about tax." Narrows your research. Silence means consider <em>every</em> discipline.</td></tr>
+            <tr><td><strong>Specific events</strong></td><td>An upcoming board meeting, audit, review, decision or deadline.</td></tr>
+            <tr><td><strong>Unfamiliar concepts</strong></td><td>Anything you do not understand. Five days is plenty; there is no excuse for still being confused on the day.</td></tr>
+            <tr><td><strong>Uncertainty</strong></td><td>Anything ending in a question, or where someone is concerned, confused, or weighing options.</td></tr>
+            <tr><td><strong>Analysis</strong></td><td>Anything your ratio work flags.</td></tr>
+            <tr><td><strong>Industry-specific accounting</strong></td><td>The standards that always matter for this industry, mentioned or not — IAS 41 for a farm, IFRS 16 for an airline, IAS 40 for a property group, rehabilitation provisions for a miner.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="step" id="s3">
+        <h4><span class="bignum">3</span>Unpack each trigger across every discipline</h4>
+        <p>This is where preparation usually fails. A trigger is an <em>issue</em>, not a discipline. Before researching anything, work each trigger through every lens — unless a discipline has been explicitly scoped out:</p>
+        <div class="two-col">
+          <div class="callout info"><strong>Financial reporting</strong> — initial recognition, subsequent measurement, derecognition, presentation, disclosure. Which standard applies first? Whose perspective? What's the deferred tax? What are the judgements?</div>
+          <div class="callout info"><strong>Tax</strong> — not just the section. The requirements for application, the exceptions, exclusions and limitations, and the effect of applying or not applying it. Income tax, CGT, VAT, dividends tax, PAYE.</div>
+          <div class="callout info"><strong>Audit</strong> — the whole cycle: planning, materiality, risk of material misstatement, responses, evidence, reporting. Plus independence and ethics.</div>
+          <div class="callout info"><strong>Financial management</strong> — valuation, financing, cost of capital, cash flow, hedging.</div>
+          <div class="callout info"><strong>MDMC</strong> — relevant costing, limiting factors, break-even, KPIs, budgeting, internal controls.</div>
+          <div class="callout info"><strong>Strategy, risk, governance, ethics</strong> — strategic fit, risk exposure, King V, the Companies Act, stakeholders, the six capitals. Could anyone's conduct be tested here?</div>
+        </div>
+        <p>Draw a mind map per trigger. It keeps you honest about breadth and stops you narrowing onto the one answer you have decided is coming.</p>
+      </div>
+
+      <div class="step" id="s4">
+        <h4><span class="bignum">4</span>Research broadly, then apply — and run the "what if" pass</h4>
+        <p>Research the <em>technical area</em>, not the task you think you will get. Revise the area first, then apply it to the case facts. Keep the relevant page of the pre-release open beside your technical material so you keep seeing the trigger in context. As you go, ask continuously: which requirements appear to be met? Which are uncertain? What am I assuming? What further information would I want?</p>
+        <p>Work <strong>one trigger at a time</strong>. Note stray thoughts about other triggers on a separate page and carry on. Spend most time on the highest-ranked triggers and the content you are <em>least</em> comfortable with — not the subjects you enjoy.</p>
+        <div class="do"><strong>The highest-return hour of the pre-release period:</strong> for each trigger, ask <em>what if</em>. What if a fact changed? What if an exception applied? What if the day adds information? Work through the alternative treatments and be able to journalise or calculate each one. The day almost always changes something. If your what-if comes up, you have already thought it through. If it doesn't, you understand the area far better anyway.</div>
+      </div>
+
+      <div class="step" id="s5">
+        <h4><span class="bignum">5</span>Study, and build the file</h4>
+        <p>You may take a lever-arch file (up to 8cm) and your SAICA handbooks. <strong>The file is not a substitute for knowing the material.</strong> Exam time is for engaging with new information, not for learning what you should already know. Anything in your file that you did not write yourself must still be studied.</p>
+        <p><strong>File contents:</strong> the pre-release itself · a one-page summary per trigger plus supporting detail · SWOT and ratio analysis · articles explaining unfamiliar concepts · industry analysis · discipline checklists · time management plans for seven, eight and nine tasks · a personal reminders page of the things you keep forgetting to do · spare paper. Index it, flag it by colour, and do not pad it with material you have never read.</p>
+        <p>Read the pre-release one last time <em>without</em> your research next to you, to get the big picture back. Then rest properly.</p>
+      </div>
+    </section>
+
+    <section id="iod" class="card">
+      <h2>Information on the day</h2>
+      <p>The day may do any of five things to what you prepared:</p>
+      <table>
+        <thead><tr><th style="width:26%">What it does</th><th>Example</th></tr></thead>
+        <tbody>
+          <tr><td>Gives you the specific task</td><td>You knew they were considering expansion; you are given an acquisition to value.</td></tr>
+          <tr><td>Supplies the inputs</td><td>You expected to do a valuation; here are the numbers.</td></tr>
+          <tr><td>Changes what you expected to do</td><td>You prepared to <em>build</em> a valuation; you are given one to <em>review</em>.</td></tr>
+          <tr><td>Changes what you thought you knew — <em>the twist</em></td><td>You thought the company was acquiring; in fact it is being acquired. You expected management's perspective; you are given the auditor's.</td></tr>
+          <tr><td>Takes you by surprise</td><td>An ethics task you had no warning of. This is normal.</td></tr>
+        </tbody>
+      </table>
+      <div class="callout warn"><strong>Everything given on the day is there for a reason.</strong> SAICA does not pad. For every line ask: why was I given this? How does it change what I already knew? What am I supposed to do with it? How do I show the marker I understood its significance?</div>
+      <p>Then do the hardest thing: <strong>identify which of your research is now irrelevant, and discard it.</strong> This is emotionally difficult after five days of work, and being ruthless about it is precisely what prevents dumping.</p>
+    </section>
+
+    <section id="timeplan" class="card">
+      <h2>The day plan</h2>
+      <p>Eight hours. Read the task list <em>first</em> and count the tasks — the detail of what is required is embedded in the documents, but the number tells you how to budget. Note the requested <strong>format</strong> of each response.</p>
+      <table>
+        <thead><tr><th style="width:30%">Allocation</th><th>Rule</th></tr></thead>
+        <tbody>
+          <tr><td>First 40 minutes</td><td>Read the information on the day and the tasks. Make planning notes. Do not start writing.</td></tr>
+          <tr><td>Last 40 minutes</td><td>Read through and check. Do not raid this early — at 11am you have no idea how the rest of the day will go.</td></tr>
+          <tr><td>The middle</td><td>Divide equally by the number of tasks, then flex: add 5–15 minutes to two or three difficult tasks, take it from the easy ones.</td></tr>
+          <tr><td>Hard ceiling</td><td><strong>Never more than 75 minutes on any task.</strong> Beyond that the marginal return is zero.</td></tr>
+        </tbody>
+      </table>
+      <p><strong>Order:</strong> consecutive is safest if you fluster easily. Strengths first builds confidence and banks time. Hardest first uses your freshest thinking. Whatever you choose, do not leave the hardest task until you are tired — and aiming to out-perform on five tasks while neglecting three is not a strategy, it is a way to fail.</p>
+      <p>Take short breaks and move. Reset deliberately between tasks so the previous one stops occupying your head.</p>
+      <div class="donot"><strong>The most reliable way to fail:</strong> going big on tasks (a) and (b), writing far too much and spending far too long. Those candidates hardly ever finish, and not finishing is close to fatal.</div>
+    </section>
+    <section id="answering" class="card">
+      <h2>The answering approach</h2>
+
+      <h3>Before you write</h3>
+      <ul class="checklist">
+        <li><strong>Identify the audience.</strong> CEO, CFO, board, junior colleague, audit partner, external party. Each gets a different tone, level of detail and type of content. A board wants strategic consequence; a financial manager wants the standard applied; a junior needs coaching, not correction. Visualise the person — the marker is playing that role.</li>
+        <li><strong>Number the components.</strong> ①②③ on the question paper. The first is usually the most important; the third and fourth matter less but must still be answered. Tick them off before you move on.</li>
+        <li><strong>Write down the scope.</strong> "High level" · "ignore tax" · "no calculations needed" · "only critique what is provided" · "at least three" · "you can assume". These are instructions. You get no credit for anything scoped out, and the time costs you elsewhere.</li>
+        <li><strong>Ask what this person actually needs to know.</strong> If you can answer that, you have worked out the task, whatever verb was used.</li>
+        <li><strong>Plan the skeleton.</strong> Sub-headings first, then key words under each, then sentences. Keep a scrap page for points that occur to you mid-sentence.</li>
+      </ul>
+
+      <h3>While you write</h3>
+      <div class="two-col">
+        <div class="do"><strong>Lead with the answer.</strong> Recommendation or conclusion in the first line or two, then the support. Busy recipients read the top.</div>
+        <div class="do"><strong>Say why, every time.</strong> Attach a <em>because</em> to every point. If you catch yourself giving the same reason repeatedly, you have stopped thinking critically.</div>
+        <div class="do"><strong>Be systematic.</strong> Line by line, contract by contract, procedure by procedure. Say what is <em>correct</em> as well as what is wrong.</div>
+        <div class="do"><strong>Be specific.</strong> "Review the payroll report" is nothing. "The financial manager compares the payroll report to each project manager's authorised overtime report and signs it as evidence of review" is a control.</div>
+        <div class="do"><strong>Breadth and depth.</strong> Breadth = the range of relevant themes covered. Depth = why each one matters. Six controls covering validity, accuracy and completeness beat six controls all covering accuracy.</div>
+        <div class="do"><strong>Cross disciplines.</strong> Unless scoped out, briefly note the tax or audit consequence of a reporting answer. A little extra value — don't go crazy and crowd out the core.</div>
+        <div class="do"><strong>Write as an insider.</strong> "I", "we", "our company". You work there. Never use your real name.</div>
+        <div class="do"><strong>Use the numbers.</strong> Quantify wherever the facts allow, and use the figures given on the day, not the ones from the pre-release.</div>
+      </div>
+      <div class="donot"><strong>Never:</strong> write out extracts of IFRS, King, the Companies Act or an ISA · refer the recipient to a specialist for something you should know yourself · state a question without explaining why it is relevant · contradict yourself across two tasks · leave an analysis unconcluded where a recommendation was asked for.</div>
+
+      <h3>Before you move on</h3>
+      <ul class="checklist">
+        <li>Does it answer the task — every component of it?</li>
+        <li>Does it meet the recipient's objective, in the requested format and tone?</li>
+        <li>Have I concluded where a conclusion was called for?</li>
+        <li>Have I shown breadth and depth?</li>
+        <li>Is it acceptable work for an entry-level CA(SA)?</li>
+        <li>Any contradictions with another task? Both answers are from me.</li>
+        <li>Is my real name anywhere?</li>
+      </ul>
+    </section>
+
+    <section id="tasktypes" class="card">
+      <h2>Task-type playbooks</h2>
+
+      <h3 id="ethics">Ethics</h3>
+      <p>Rarely triggered — expect to meet it for the first time on the day. There is <em>no such thing</em> as "a business question, not an ethical question". Business is an ethical endeavour; look for the ethical dimension in every task. Structure every ethics task the same way:</p>
+      <ol>
+        <li><strong>What is the dilemma or concern?</strong> Describe it precisely. If you cannot articulate it, you cannot respond to it.</li>
+        <li><strong>What bears on it?</strong> Apply the facts <em>plus</em> a framework. SAICA CPC: integrity, objectivity, professional competence and due care, confidentiality, professional behaviour — and the threats to each (self-interest, self-review, advocacy, familiarity, intimidation): identify, evaluate, address. King V: ethical and effective leadership, organisational ethics, corporate citizenship, stakeholder inclusivity. Companies Act: s76 duties, s77 liability, s72(4) social and ethics committee. NOCLAR: CPC s260 / s360. The ethics triangle: good for self, good for others.</li>
+        <li><strong>What should be done?</strong> A balanced discussion of the alternatives — note the negatives of the option you favour and the positives of the others — then a clear course of action. State mandatory requirements plainly and respectfully; use "consider" for the optional.</li>
+      </ol>
+      <p>Cover more than one stakeholder group, and link each impact to the specific facts. Generic stakeholder analysis is explicitly penalised.</p>
+
+      <h3 id="review">Reviewing someone's work — a calculation, journals, notes, or AI output</h3>
+      <p>The single most common task shape in the APC.</p>
+      <ul class="clean">
+        <li>Work <strong>line by line</strong>. For each item: is it correctly included, and is the amount right?</li>
+        <li>Say what is <strong>correct</strong> as well as what is wrong. If you do not write it down, the marker cannot credit it.</li>
+        <li>Identify items wrongly <em>excluded</em>, not just wrongly included. This is harder and it separates competent from borderline, because it requires you to understand the principles the calculation rests on.</li>
+        <li>Where the work involves forecasts or judgements, question their reasonableness — and give a comparative or a reason for the question. "Why an after-tax rate?" is worth nothing; "why an after-tax rate, when these are pre-tax cash flows and should be discounted at a pre-tax rate?" is worth the grade.</li>
+        <li>Where the facts leave genuine uncertainty, work <em>with</em> the uncertainty: explain what different outcomes would follow from different facts, rather than forcing a single answer.</li>
+        <li>Add qualitative insight linked to the context. Context is always worth something.</li>
+        <li>If it is a junior's work, adopt a coaching, questioning tone. Explain the principle, not just the verdict.</li>
+        <li>Check consistency: if you say something should be treated a particular way, your illustrative journal must reflect it.</li>
+      </ul>
+
+      <h3 id="openended">Open-ended tasks — "key factors", "key issues", "what should we consider"</h3>
+      <p>These test your thought process and often need no conclusion. "Key" means key. Depth beats quantity: a short list of well-explained, contextualised points scores far higher than a long list of generic ones — and listing generic answers actively counts against you. Understand the purpose, plan the structure before writing, and be specific and concise.</p>
+
+      <h3 id="controls">Internal control weaknesses and recommendations</h3>
+      <ul class="clean">
+        <li>A <strong>weakness</strong> is the root cause plus what could go wrong as a result — not a restatement of the process.</li>
+        <li>A <strong>recommendation</strong> must be practical in the actual operating environment, linked to a specific weakness, and detailed enough to implement: who does it, what they do, how often, against what, and what happens on an exception.</li>
+        <li>Cover validity, accuracy and completeness — and separate preventative from detective controls.</li>
+        <li>Separate monitoring and oversight from operations. Never give an independent reviewer an operational duty that compromises their objectivity.</li>
+        <li>Use any stated management objective — if the board wants technology and ERP integration, a manual control is only half an answer.</li>
+      </ul>
+
+      <h3 id="audit">Audit procedures and reporting</h3>
+      <ul class="clean">
+        <li>Procedures must say <em>what</em> evidence, <em>how</em> it is obtained, and <em>why</em> it addresses the risk. Identify the risk and therefore the direction of testing — understatement or overstatement.</li>
+        <li>Weigh reliability: external beats internal; original beats copy; observation and inspection beat enquiry. <strong>Enquiry alone is never sufficient.</strong></li>
+        <li>Keep management's responsibilities and the auditor's distinct. Management prepares and assesses; the auditor evaluates.</li>
+        <li>Going concern: at least twelve months from the <strong>end of the reporting period</strong>. A material uncertainty is <em>doubt</em>, not a conclusion that the entity will fail. Adequately disclosed → unmodified opinion plus a Material Uncertainty section. Inadequately disclosed → qualified or adverse. Basis inappropriate → adverse.</li>
+        <li>Report structure: <strong>Opinion first, then Basis for Opinion.</strong> Material but not pervasive → qualified. Legal and regulatory matters go in their own section.</li>
+      </ul>
+
+      <h3 id="relevant">Relevant costing and decision-making</h3>
+      <div class="callout warn"><strong>Only future cash flows that change as a result of the decision are relevant.</strong> Exclude sunk costs, committed costs, allocated overheads and depreciation. Include opportunity costs — the benefit forgone by using a resource you already own. Apply every adjustment consistently on <em>both</em> sides of the comparison, and state explicitly why each item is in or out.</div>
+      <ul class="clean">
+        <li>Where a resource is scarce, compare contribution <em>per unit of the limiting factor</em>.</li>
+        <li>Answer at the level asked. A screening analysis is not an NPV; building the model you were not asked for costs you the tasks you did not finish.</li>
+        <li>Where the numbers come out close, say so explicitly, then carry the decision on judgement — and still reach a clear recommendation.</li>
+        <li>Separate what recurs from what happens once, and consider the asymmetry: what does each option cost if deferred?</li>
+      </ul>
+    </section>
+    <section id="formats" class="card">
+      <h2>Writing formats</h2>
+      <p>The format you are asked for signals the level of detail expected. An email is the shortest form; a report the fullest. <strong>Never use your real name in any of them.</strong></p>
+
+      <h3>Email — the default</h3>
+      <pre class="journal">To:       [Name, title]
+From:     Newly qualified CA(SA)
+Date:     [date of the exam]
+Subject:  [SPECIFIC — what this is about]
+
+Dear [Name]
+
+[The crux, in one or two lines. If you have a recommendation, give it here.]
+
+[Body: one idea per paragraph, topic sentence first. Headings or numbered
+points where the task has several components.]
+
+[Close: next steps, or an offer to discuss.]
+
+Kind regards
+Newly qualified CA(SA)</pre>
+      <p>Keep it short and to the point. No textspeak. Be polite. Where the content is long, put the detail in a clearly labelled <strong>attachment</strong> and keep the email as a covering note — this is a legitimate, tidy way to handle a task needing both a calculation and a discussion, and it lets you lead with the conclusion.</p>
+      <p class="note">Quick hack: draft the first email opening once, then copy it for the other tasks, changing only the recipient and the subject line.</p>
+
+      <h3>Memo — internal, interdepartmental</h3>
+      <p><code>TO: / FROM: / DATE: / SUBJECT:</code> (very specific). Introduction explains the topic and background, in a decisive but polite tone. Body in numbered or bulleted points under <strong>informative, instructive headings</strong> so it can be skimmed. Short, positive closing paragraph. <strong>A memo is not signed.</strong></p>
+
+      <h3>Report — formal and comprehensive</h3>
+      <p>Title page (title, author, job title, organisation, date) → abstract, written last (~250 words: the problem, the method, the conclusions, the recommendations) → introduction (context and scope, background, objectives and limits, method, an indication of the recommendations) → discussion and findings (interpret and analyse; explain the significance of each point; state the limitations you encountered and how they could be resolved) → conclusions and recommendations (draw it together; introduce nothing new).</p>
+
+      <h3>Business letter — external parties</h3>
+      <p>Date always. Recipient's name, title and address. "Dear Mrs Sithole" (name preferred). Topic line in capitals. First paragraph states the purpose in two lines. Middle paragraphs: one aspect each, topic sentence first. Concluding paragraph restates the purpose and proposes a course of action. Closing line as a full sentence. "Yours sincerely" after a name; "Yours faithfully" after "Dear Sir or Madam". No comma after the salutation.</p>
+
+      <h3>Minutes</h3>
+      <p>Heading (what, when, where) · members present with roles in brackets · apologies · guests · approval of previous minutes (proposer/seconder, vote, date carried) · matters arising (Item / Discussion / Action) · new business (same structure; "Motion" replaces "Discussion" where one is formally proposed) · announcements · future agenda items · next meeting · prepared by. Record each decision and a brief rationale. <strong>Past tense throughout</strong> — "he would circulate", not "he will circulate".</p>
+
+      <h3>Slides</h3>
+      <p>Only Word and Excel are available. Label "Slide 1", "Slide 2" and put the content beneath, or draw a border around each. Nobody is marking design — they are marking what you chose to put on the slide. Keep points short, but not so short that the argument is lost, and make sure any journals or workings agree with the points on the slides.</p>
+
+      <h3>A provided template</h3>
+      <p><strong>Use it, exactly as structured</strong>, linking each response to its reference. Do not restructure it, and do not add content it did not ask for.</p>
+
+      <h3>Matching tone to audience</h3>
+      <table>
+        <thead><tr><th style="width:26%">Recipient</th><th style="width:40%">What they want</th><th>Tone</th></tr></thead>
+        <tbody>
+          <tr><td><strong>CEO</strong></td><td>Strategic consequence, the decision, concisely</td><td>Formal, brief, lead with the answer</td></tr>
+          <tr><td><strong>CFO / Financial manager</strong></td><td>The detail, the standard applied, the numbers</td><td>Formal, technical, precise</td></tr>
+          <tr><td><strong>Board / a director</strong></td><td>Consequence, risk, what they must decide</td><td>Formal and respectful. Flag a <em>possible contravention</em>; never allege illegality</td></tr>
+          <tr><td><strong>Non-executive without a finance background</strong></td><td>A plain explanation of the financial concept</td><td>Formal, nothing assumed</td></tr>
+          <tr><td><strong>Audit partner</strong></td><td>Risk of material misstatement, high-risk items</td><td>Professional, risk-focused</td></tr>
+          <tr><td><strong>Audit manager</strong></td><td>The detail of the work, whether requirements are met</td><td>Professional, thorough</td></tr>
+          <tr><td><strong>Peer or junior</strong></td><td>Coaching, the principle explained</td><td>Collegial, questioning, constructive</td></tr>
+          <tr><td><strong>External party</strong></td><td>Only what is properly theirs to know</td><td>Formal, careful about confidentiality</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="penalties" class="card">
+      <h2>What loses grades</h2>
+      <p>Compiled from SAICA and UCT examiners' comments, 2020–2026. These repeat every year.</p>
+
+      <h3>The seventeen recurring failures</h3>
+      <table>
+        <tbody>
+          <tr><td style="width:4%">1</td><td><strong>Spending too long on task (a) and (b).</strong> Candidates who go big early hardly ever finish.</td></tr>
+          <tr><td>2</td><td><strong>Not answering every part of the task.</strong> A missed component makes a C unlikely.</td></tr>
+          <tr><td>3</td><td><strong>Ignoring the information on the day.</strong> The most common cause of an LC.</td></tr>
+          <tr><td>4</td><td><strong>Forgetting the pre-release context.</strong> Recommending a cash distribution for a cash-constrained business shows you do not understand the company.</td></tr>
+          <tr><td>5</td><td><strong>Not explaining why.</strong> "That's wrong" is worthless. Explain the principle and why the treatment fails it.</td></tr>
+          <tr><td>6</td><td><strong>Dumping technical content.</strong> Reproducing IFRS, King or the Companies Act earns nothing and signals weak communication.</td></tr>
+          <tr><td>7</td><td><strong>Thinking the goal is to apply your research.</strong> The goal is to answer the task. Sometimes the research turns out largely irrelevant — that is fine.</td></tr>
+          <tr><td>8</td><td><strong>Fundamental errors.</strong> Depreciation in a cash flow forecast; "IFRS says" something it does not; revenue only when cash is received. One of these casts doubt over everything else.</td></tr>
+          <tr><td>9</td><td><strong>Writing as an outsider.</strong> Use "I", "we", "our company".</td></tr>
+          <tr><td>10</td><td><strong>Freezing over what you don't know.</strong> Expect to be caught out. Go back to first principles and start writing — starting is what unfreezes you.</td></tr>
+          <tr><td>11</td><td><strong>Saying or doing something unethical</strong>, including offering to share confidential information.</td></tr>
+          <tr><td>12</td><td><strong>Not stating the obvious.</strong> If the discount rate is right, say so. If a procedure is correct, write "Correct". Unwritten knowledge cannot be credited.</td></tr>
+          <tr><td>13</td><td><strong>Panicking into major rewrites.</strong> Pause, re-reason, change only what must change.</td></tr>
+          <tr><td>14</td><td><strong>Under-performing on financial reporting.</strong> SAICA treats FR performance as the key indicator, and there is usually more than one FR task.</td></tr>
+          <tr><td>15</td><td><strong>Not checking your work</strong>, so contradictions survive — including between two tasks that touch the same issue.</td></tr>
+          <tr><td>16</td><td><strong>Deferring to a specialist</strong> where you should know the answer yourself.</td></tr>
+          <tr><td>17</td><td><strong>Using your real name.</strong></td></tr>
+        </tbody>
+      </table>
+
+      <h3>Failures of scope and level</h3>
+      <div class="donot">
+        <strong>Answering wider than asked</strong> was the largest single source of lost grades in the August 2026 QE: setting out the whole five-step revenue model when asked only to review journals; building DCF and IRR models when told the analysis was an initial screening; proposing new audit procedures when told to critique only what was given. Every one of those was explicitly ruled out by the wording on the day.<br/><br/>
+        <strong>Answering at the wrong level.</strong> "High level" means skip the intricate mechanics — not the core principle, and never the application of the facts and dates given.<br/><br/>
+        <strong>Unnecessary definitions.</strong> If there is no doubt it is a contract, do not define a contract.
+      </div>
+
+      <h3>Failures of depth</h3>
+      <ul class="clean">
+        <li>Identifying an issue without explaining why it matters or what follows from it.</li>
+        <li>Naming a framework without applying it. Restating a King principle as written shows nothing.</li>
+        <li>Points too brief to stand — half sentences, bare bullets, no application.</li>
+        <li>Vague recommendations: "improve controls", "increase monitoring", "use CCTV".</li>
+        <li>The same reason given for several different items — a sign you have stopped thinking.</li>
+      </ul>
+
+      <h3>Failures of breadth</h3>
+      <ul class="clean">
+        <li>Raising one or two obvious issues when the case contains five.</li>
+        <li>Repeating a point in different words and counting it as coverage.</li>
+        <li>Recommendations all addressing one theme — six controls all about accuracy; five KPIs all measuring revenue growth.</li>
+        <li>Reviewing items in isolation when they operate as a set. KPIs work together. A set of controls works together. All reconciling items must be dealt with.</li>
+        <li>Considering only one stakeholder group in a governance or ethics task.</li>
+      </ul>
+
+      <h3>Failures of judgement</h3>
+      <ul class="clean">
+        <li><strong>No conclusion.</strong> Where a recommendation was asked for, an unconcluded analysis is an incomplete task — <em>especially</em> where the numbers are close, because then the recommendation must be carried explicitly by judgement.</li>
+        <li>Leaving qualitative factors as a list instead of converting them into a decision the recipient can act on.</li>
+        <li>Accepting management's — or a tool's — numbers without professional scepticism.</li>
+        <li>Answering from the wrong perspective: the counterparty's rather than your employer's.</li>
+        <li>Strategic points not contextualised to the business. These receive no credit.</li>
+        <li>Recommendations that are not pragmatic for this company at this stage of its life.</li>
+      </ul>
+    </section>
+
+    <section id="final" class="card">
+      <h2>Final check — before you upload</h2>
+      <ul class="checklist">
+        <li>Every task attempted. No blanks.</li>
+        <li>Every component of every task answered.</li>
+        <li>Each response in the format requested, addressed to the right person, in the right tone.</li>
+        <li>Information on the day applied in every task — specific facts, specific figures.</li>
+        <li>Every point carries a <em>because</em>.</li>
+        <li>A clear conclusion or recommendation wherever one was asked for.</li>
+        <li>Nothing included that was scoped out.</li>
+        <li>No contradictions between tasks.</li>
+        <li>No extracts of standards or legislation reproduced.</li>
+        <li>My real name is nowhere in the document.</li>
+        <li>Spellcheck run.</li>
+      </ul>
+      <div class="callout success"><strong>"Opportunity comes to the prepared mind."</strong> There is no way to know what the case will cover. With thorough, relevant preparation and a plan you stick to, you can handle whatever it is.</div>
+    </section>
+
+  </main>
+</div>
+
+<footer>
+  APC Playbook — compiled from the UCT APC Professional Programme materials (Acing the APC!, the Case Study Method, trigger identification and technical research, responding to open-ended tasks and to changes in information, critically reviewing calculations) and from SAICA and UCT examiners' comments 2020–2026.<br/>
+  For personal exam preparation. Educational use only.
+</footer>
+
+<script>
+const sections = document.querySelectorAll('section[id], h3[id], div.step[id]');
+const links = document.querySelectorAll('nav.toc a');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(sec => {
+    const top = sec.getBoundingClientRect().top;
+    if(top < 120) current = sec.id;
+  });
+  links.forEach(l => {
+    l.style.background = '';
+    l.style.borderLeftColor = 'transparent';
+    if(l.getAttribute('href') === '#'+current){
+      l.style.background = 'var(--soft)';
+      l.style.borderLeftColor = 'var(--accent)';
+    }
+  });
+});
+</script>
+
+</body>
+</html>

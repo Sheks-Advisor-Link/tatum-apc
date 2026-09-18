@@ -1,0 +1,1349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>APC 2026 1st Qualifying Exam — Diamante Ltd | Worked Answers</title>
+<style>
+  :root{
+    --navy:#0b2545;
+    --blue:#13315c;
+    --accent:#1e6091;
+    --soft:#e8f0f7;
+    --border:#d5dee8;
+    --ok:#1b7a3a;
+    --warn:#b8860b;
+    --bad:#b00020;
+    --muted:#5c6b7a;
+    --bg:#f6f8fb;
+    --card:#ffffff;
+    --code:#f1f5f9;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,sans-serif;
+    background:var(--bg);
+    color:#1a1a1a;
+    line-height:1.6;
+  }
+  header{
+    background:linear-gradient(135deg,var(--navy),var(--accent));
+    color:white;
+    padding:32px 40px;
+    position:sticky;
+    top:0;
+    z-index:100;
+    box-shadow:0 2px 10px rgba(0,0,0,.15);
+  }
+  header h1{margin:0;font-size:22px;font-weight:600;letter-spacing:.3px}
+  header .subtitle{font-size:13px;opacity:.85;margin-top:4px}
+  .layout{display:grid;grid-template-columns:300px 1fr;max-width:1500px;margin:0 auto}
+  nav.toc{
+    position:sticky;
+    top:96px;
+    align-self:start;
+    padding:24px 16px;
+    max-height:calc(100vh - 96px);
+    overflow-y:auto;
+    border-right:1px solid var(--border);
+    background:white;
+  }
+  nav.toc h3{font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin:0 0 12px}
+  nav.toc ul{list-style:none;padding:0;margin:0 0 20px}
+  nav.toc li{margin:2px 0}
+  nav.toc a{
+    display:block;
+    padding:6px 10px;
+    color:#334155;
+    text-decoration:none;
+    font-size:13px;
+    border-radius:4px;
+    border-left:3px solid transparent;
+  }
+  nav.toc a:hover{background:var(--soft);color:var(--navy)}
+  nav.toc a.section{font-weight:600;color:var(--navy)}
+  nav.toc a.sub{padding-left:22px;font-size:12.5px;color:var(--muted)}
+  main{padding:40px 48px;max-width:100%}
+  h2{
+    font-size:22px;
+    color:var(--navy);
+    border-bottom:3px solid var(--accent);
+    padding-bottom:8px;
+    margin-top:0;
+  }
+  h3{font-size:17px;color:var(--blue);margin-top:28px}
+  h4{font-size:15px;color:var(--blue);margin-top:20px;margin-bottom:8px}
+  .card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:24px 28px;
+    margin-bottom:24px;
+    box-shadow:0 1px 3px rgba(0,0,0,.04);
+  }
+  .meta{
+    background:var(--soft);
+    border-left:4px solid var(--accent);
+    padding:12px 16px;
+    font-size:13.5px;
+    border-radius:4px;
+    margin-bottom:20px;
+  }
+  .meta div{margin:2px 0}
+  details{
+    border:1px solid var(--border);
+    border-radius:8px;
+    margin:10px 0;
+    background:#fafbfc;
+    overflow:hidden;
+  }
+  details[open]{background:white}
+  summary{
+    cursor:pointer;
+    padding:12px 16px;
+    font-weight:600;
+    color:var(--navy);
+    list-style:none;
+    user-select:none;
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  summary::-webkit-details-marker{display:none}
+  summary::before{
+    content:"▸";
+    color:var(--accent);
+    font-size:14px;
+    transition:transform .2s;
+  }
+  details[open] > summary::before{transform:rotate(90deg)}
+  details .inner{padding:4px 18px 16px 40px}
+  table{
+    width:100%;
+    border-collapse:collapse;
+    margin:14px 0;
+    font-size:13.5px;
+    background:white;
+  }
+  th,td{
+    border:1px solid var(--border);
+    padding:8px 10px;
+    text-align:left;
+    vertical-align:top;
+  }
+  th{background:var(--soft);color:var(--navy);font-weight:600}
+  td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+  .pill{
+    display:inline-block;
+    padding:2px 10px;
+    border-radius:999px;
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:.5px;
+    text-transform:uppercase;
+  }
+  .pill.agree{background:#dcfce7;color:var(--ok)}
+  .pill.disagree{background:#fee2e2;color:var(--bad)}
+  .pill.partial{background:#fef3c7;color:var(--warn)}
+  .pill.info{background:#dbeafe;color:#1e40af}
+  .pill.doc{background:#e0e7ff;color:#3730a3}
+  pre.journal{
+    background:var(--code);
+    border-left:4px solid var(--accent);
+    padding:12px 14px;
+    font-family:"SF Mono",Menlo,Consolas,monospace;
+    font-size:13px;
+    overflow-x:auto;
+    border-radius:4px;
+    margin:10px 0;
+    white-space:pre;
+  }
+  .callout{
+    border-radius:8px;
+    padding:12px 16px;
+    margin:14px 0;
+    font-size:14px;
+  }
+  .callout.warn{background:#fffbea;border-left:4px solid var(--warn)}
+  .callout.danger{background:#fef2f2;border-left:4px solid var(--bad)}
+  .callout.info{background:#eff6ff;border-left:4px solid #1e40af}
+  .callout.success{background:#f0fdf4;border-left:4px solid var(--ok)}
+  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media (max-width:900px){
+    .layout{grid-template-columns:1fr}
+    nav.toc{position:static;max-height:none;border-right:none;border-bottom:1px solid var(--border)}
+    main{padding:24px}
+    .two-col{grid-template-columns:1fr}
+  }
+  footer{
+    padding:24px 40px;
+    text-align:center;
+    font-size:12px;
+    color:var(--muted);
+    border-top:1px solid var(--border);
+    background:white;
+  }
+  .tag{display:inline-block;background:var(--soft);color:var(--navy);padding:2px 8px;border-radius:4px;font-size:11px;margin:2px;font-weight:600}
+  .controls{
+    display:flex;
+    gap:8px;
+    margin-bottom:16px;
+    flex-wrap:wrap;
+  }
+  .controls button{
+    background:white;
+    border:1px solid var(--border);
+    color:var(--navy);
+    padding:6px 14px;
+    border-radius:6px;
+    cursor:pointer;
+    font-size:12.5px;
+    font-weight:600;
+  }
+  .controls button:hover{background:var(--soft);border-color:var(--accent)}
+  .controls button.active{background:var(--accent);color:white;border-color:var(--accent)}
+  @media print{
+    header,nav.toc,.controls,.tab-buttons{display:none}
+    .layout{grid-template-columns:1fr}
+    main{padding:0}
+    .card{box-shadow:none;break-inside:avoid}
+    details{break-inside:avoid}
+    details > .inner{display:block !important}
+    details > summary::before{content:""}
+    .tab-content{display:block !important}
+  }
+  ul.clean{margin:6px 0;padding-left:20px}
+  ul.clean li{margin:4px 0}
+  .ref-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;margin-top:14px}
+  .ref-box{background:var(--soft);border-radius:6px;padding:12px 14px;font-size:13px}
+  .ref-box h5{margin:0 0 6px;color:var(--navy);font-size:13px}
+  .ref-box ul{margin:0;padding-left:18px}
+  .ref-box li{margin:3px 0}
+  .note{font-size:12.5px;color:var(--muted);font-style:italic}
+  .email-box{
+    background:#fdfdfd;
+    border:1px solid var(--border);
+    border-radius:8px;
+    padding:18px 22px;
+    margin:14px 0;
+  }
+  .email-header{
+    border-bottom:1px solid var(--border);
+    padding-bottom:10px;
+    margin-bottom:12px;
+    font-size:13px;
+  }
+  .email-header div{margin:2px 0}
+  .email-header strong{display:inline-block;min-width:80px;color:var(--muted)}
+  .doc-label{
+    display:inline-block;
+    background:var(--navy);
+    color:white;
+    padding:4px 12px;
+    border-radius:4px;
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:1px;
+    margin-right:10px;
+  }
+  .tab-buttons{
+    display:flex;
+    gap:4px;
+    margin-bottom:16px;
+    border-bottom:2px solid var(--border);
+    flex-wrap:wrap;
+  }
+  .tab-buttons button{
+    background:transparent;
+    border:none;
+    padding:10px 16px;
+    cursor:pointer;
+    font-size:13px;
+    font-weight:600;
+    color:var(--muted);
+    border-bottom:3px solid transparent;
+    margin-bottom:-2px;
+  }
+  .tab-buttons button.active{color:var(--accent);border-bottom-color:var(--accent)}
+  .tab-content{display:none}
+  .tab-content.active{display:block}
+  .highlight-box{
+    background:#fff9e6;
+    border:1px solid #f3d573;
+    border-radius:6px;
+    padding:10px 14px;
+    margin:10px 0;
+    font-size:13.5px;
+  }
+  .pill.task{background:#ede9fe;color:#5b21b6}
+  .pill.easy{background:#dcfce7;color:var(--ok)}
+  .pill.med{background:#fef3c7;color:var(--warn)}
+  .pill.hard{background:#fee2e2;color:var(--bad)}
+  .answer{border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:8px;background:#fff;padding:18px 22px;margin:16px 0}
+  .answer .hdr{font-size:13px;color:var(--muted);border-bottom:1px solid var(--border);padding-bottom:10px;margin-bottom:14px}
+  .answer .hdr div{margin:2px 0}
+  .answer .hdr strong{display:inline-block;min-width:92px;color:var(--muted)}
+  .approach{background:#f8fafc;border:1px dashed var(--border);border-radius:8px;padding:14px 18px;margin:14px 0;font-size:13px}
+  .approach h5{margin:0 0 8px;color:var(--navy);font-size:12px;text-transform:uppercase;letter-spacing:1px}
+  .approach ul{margin:6px 0;padding-left:18px}
+  .approach li{margin:3px 0}
+  td.agree{background:#f0fdf4}
+  td.disagree{background:#fef2f2}
+  td.partial{background:#fffbea}
+  .kicker{font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);font-weight:700;margin-top:22px}
+  .sig{margin-top:14px;font-size:13.5px}
+  .calc th, .calc td{font-size:13px}
+  .calc tbody tr.total td{font-weight:700;background:var(--soft)}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>APC 2026 — 1st Qualifying Exam (August) — Diamante Ltd</h1>
+  <div class="subtitle">Worked answers to Tasks (a)–(h) · Prepared using the UCT APC case study method · Exam date 5 August 2026</div>
+</header>
+
+<div class="layout">
+
+  <nav class="toc">
+    <h3>Contents</h3>
+    <ul>
+      <li><a href="#how" class="section">How to use this</a></li>
+      <li><a href="#context" class="section">Case context &amp; triggers</a></li>
+      <li><a href="#triggers" class="sub">Trigger map</a></li>
+      <li><a href="#plan" class="sub">Time plan on the day</a></li>
+      <li><a href="#task-a" class="section">(a) Revenue — FEC &amp; rare diamond</a></li>
+      <li><a href="#a-c1" class="sub">Contract 1 — journals</a></li>
+      <li><a href="#a-c2" class="sub">Contract 2 — Eternal Flame</a></li>
+      <li><a href="#task-b" class="section">(b) Mine 2 — three options</a></li>
+      <li><a href="#b-t1" class="sub">T1 — Sell (IFRS 5)</a></li>
+      <li><a href="#b-t2" class="sub">T2 — Partner (IFRS 11)</a></li>
+      <li><a href="#b-t3" class="sub">T3 — Close (IAS 19/37)</a></li>
+      <li><a href="#task-c" class="section">(c) Remuneration KPIs</a></li>
+      <li><a href="#c-design" class="sub">Scheme design</a></li>
+      <li><a href="#c-review" class="sub">KPI-by-KPI review</a></li>
+      <li><a href="#c-new" class="sub">Recommended KPIs</a></li>
+      <li><a href="#task-d" class="section">(d) Block A vs Block B</a></li>
+      <li><a href="#d-calc" class="sub">Screening calculation</a></li>
+      <li><a href="#d-relevant" class="sub">Relevant costing</a></li>
+      <li><a href="#d-sens" class="sub">Sensitivity</a></li>
+      <li><a href="#d-qual" class="sub">Judgement &amp; recommendation</a></li>
+      <li><a href="#task-e" class="section">(e) Sustainability campaign</a></li>
+      <li><a href="#task-f" class="section">(f) Shareholder loans — tax</a></li>
+      <li><a href="#f-a" class="sub">Shareholder A — s19</a></li>
+      <li><a href="#f-b" class="sub">Shareholder B — s8F</a></li>
+      <li><a href="#task-g" class="section">(g) Bagging &amp; transport controls</a></li>
+      <li><a href="#task-h" class="section">(h) Audit WP review (AuditAI)</a></li>
+      <li><a href="#h-e9" class="sub">WP E9 template</a></li>
+      <li><a href="#h-f4" class="sub">WP F4 errors</a></li>
+      <li><a href="#lessons" class="section">Marker calibration</a></li>
+    </ul>
+  </nav>
+
+  <main>
+
+    <div class="controls">
+      <button onclick="toggleAll(true)">Expand all</button>
+      <button onclick="toggleAll(false)">Collapse all</button>
+      <button onclick="window.print()">Print / Save as PDF</button>
+    </div>
+
+    <section id="how" class="card">
+      <div class="meta">
+        <div><strong>Case:</strong> Diamante Ltd — JSE-listed South African diamond miner, two mines, FY-end 30 June 2026</div>
+        <div><strong>Role:</strong> Newly qualified CA(SA) at Diamante — except Task (h), where you are David Khumalo, newly qualified CA(SA) at KZL Inc.</div>
+        <div><strong>Tasks:</strong> Eight — (a) to (h)</div>
+        <div><strong>Scope:</strong> IFRS Accounting Standards, South African Acts and Regulations, ISAs, King V, SAICA CPC</div>
+      </div>
+      <h2>How to use this document</h2>
+      <p>Each task below sets out, first, <strong>the approach</strong> — how the task should have been read and planned on the day — and then <strong>the answer</strong> in the form and tone the task asked for. The approach boxes exist because the APC is not marked on knowledge alone: it is marked on whether you answered <em>what was asked</em>, applied <em>the information on the day</em>, and communicated in a way that is useful to the named recipient.</p>
+      <div class="callout info">
+        <strong>The three things that decide every task.</strong> (1) Did you answer <em>every component</em> of the task, in the requested format, to the named audience? (2) Did you apply the <em>information on the day</em> rather than reproduce pre-release research? (3) Did you explain <em>why</em> — breadth (what) plus depth (why it matters)?
+      </div>
+      <p class="note">Answers are written in the first person as the newly qualified CA(SA) at Diamante. Nowhere is a real candidate name used — in the APC you are never yourself, you are the role.</p>
+    </section>
+
+    <section id="context" class="card">
+      <h2>Case context and trigger map</h2>
+      <p>Diamante is loss-making (FY2026 loss R1 044m), has just impaired both mines by R963m, has R2 925m of borrowings reclassified to current, and is dependent on a three-legged refinancing: a bank commitment to extend maturity to 2030, which is itself <em>conditional</em> on a successful rights issue <em>and</em> on Shareholders A and B agreeing revised loan terms. Every task in this paper touches that fact pattern somewhere, and the strongest answers keep pulling back to it.</p>
+
+      <div class="two-col">
+        <div class="callout warn"><strong>Financial position at 30 June 2026 (draft).</strong> Revenue R1 863m (Mine 1: R1 233m; Mine 2: R630m). Loss for the year R1 044m. Equity R891m. Cash R333m. Current liabilities R3 357m against current assets R1 017m — a working capital deficit of R2 340m.</div>
+        <div class="callout warn"><strong>What is driving the loss.</strong> Impairment of non-financial assets R963m and of financial assets R207m; depreciation R675m; profit on sale of the Botswana mine R405m flattering the discontinued operations line.</div>
+      </div>
+
+      <h3 id="triggers">Trigger map — pre-release to task</h3>
+      <p>The pre-release did not tell you what would be asked. It told you what to <em>understand</em>. This is how each trigger converted on the day:</p>
+      <table>
+        <thead><tr><th style="width:24%">Pre-release trigger</th><th style="width:38%">What a well-prepared candidate researched</th><th style="width:38%">What the day actually asked</th></tr></thead>
+        <tbody>
+          <tr><td>Doc 2/3 — "help with the accounting for a few revenue items"; USD sales, currency volatility a named key risk</td><td>IFRS 15 five-step model; point-in-time vs over-time; IAS 21 foreign currency transactions; FECs and IFRS 9 derivative measurement; hedge accounting requirements; IFRIC 22</td><td>Task (a): review journals for a USD sale plus an FEC (IAS 21/IFRS 9), and determine <em>when</em> control passes on a rare diamond (IFRS 15.38 indicators). No five-step dump required.</td></tr>
+          <tr><td>Doc 3 — "the board is evaluating possible decisions relating to the future of Mine 2"</td><td>Deliberately broad. Sell → IFRS 5. Partner → IFRS 10/11/IAS 28. Close → IAS 19, IAS 37, IFRIC 1, IFRS 5.32. Impairment reversal, useful lives</td><td>Task (b): all three, at a high level, with tax scoped out. The breadth of preparation <em>was</em> the test.</td></tr>
+          <tr><td>Doc 5 — new long-term incentive scheme and five KPIs, plus AGM dissent on remuneration</td><td>King V remuneration principles; Companies Act s41 and s30(4); JSE remuneration voting; SMART KPI design; IFRS 2 classification</td><td>Task (c): critically review the five KPIs and recommend at least three new ones. IFRS 2 was <em>not</em> asked — resist it.</td></tr>
+          <tr><td>Doc 4 — mine optimisation review; capital constrained; "familiarise yourself with evaluating competing investment opportunities where capital is constrained"</td><td>Relevant costing (sunk, opportunity, avoidable costs); limiting-factor analysis; capital rationing; NPV/IRR; qualitative strategic screens</td><td>Task (d): a <strong>one-year screening</strong> comparison, not an NPV. The technical hurdle was the drill rig opportunity cost and the sunk consultant fee.</td></tr>
+          <tr><td>Doc 2 — traceability, Kimberley Process, LGD competition, climate strategy, GHG roadmap</td><td>King V, SAICA CPC, Consumer Protection Act, ARB Code, greenwashing, &lt;IR&gt; Framework, six capitals</td><td>Task (e): an <em>untriggered</em> ethics task — a marketing claim management admits it cannot substantiate.</td></tr>
+          <tr><td>Doc 2 — refinancing; shareholders "open to other suggestions"; "nothing should have unintended adverse tax consequences"</td><td>s19 debt benefit and para 12A; s8F hybrid debt; s24J; s64FA; s24BA; s23M; VAT on financial services</td><td>Task (f): exactly that — and the phrase "unintended adverse tax consequences" in the pre-release was the clearest single signpost in the whole pack.</td></tr>
+          <tr><td>Doc 2 — "we regularly engage with our Internal Audit Division … especially considering new technologies"</td><td>Internal control principles; ERP integration; segregation of duties; inventory custody controls in high-value goods</td><td>Task (g): identify weaknesses and recommend improvements in bagging and transit — with technology and ERP integration an explicit management objective.</td></tr>
+          <tr><td>Doc 1/2 — going concern; KZL Inc is the auditor; "the auditors will no doubt also be focusing on this matter"</td><td>ISA 570; ISA 500 evidence; ISA 700/705 report structure; Companies Act authorisation of share issues; ISA 220/ISQM 1</td><td>Task (h): critically review AI-drafted procedures and a draft Basis for Qualified Opinion — from the <em>auditor's</em> side of the engagement.</td></tr>
+        </tbody>
+      </table>
+
+      <h3 id="plan">Time plan used</h3>
+      <p>Eight tasks, eight hours. 40 minutes to read and plan, 40 minutes to check at the end, leaving 400 minutes across eight tasks — 50 minutes each, then flexed by difficulty.</p>
+      <table>
+        <thead><tr><th>Task</th><th>Subject</th><th>Assessed difficulty</th><th>Time</th><th>Why</th></tr></thead>
+        <tbody>
+          <tr><td>(a)</td><td>FR — revenue, IAS 21, IFRS 9</td><td><span class="pill easy">Easy</span></td><td>45 min</td><td>Well-triggered; the risk is over-writing, not under-knowing</td></tr>
+          <tr><td>(b)</td><td>FR — IFRS 5, IFRS 11, IAS 19/37</td><td><span class="pill med">Medium</span></td><td>55 min</td><td>Three separate standards; breadth is the test</td></tr>
+          <tr><td>(c)</td><td>MDMC / governance — KPIs</td><td><span class="pill med">Medium</span></td><td>50 min</td><td>Judgement-heavy; needs Diamante-specific reasoning</td></tr>
+          <tr><td>(d)</td><td>MDMC / FM — relevant costing</td><td><span class="pill easy">Easy</span></td><td>50 min</td><td>Calculation is short; the recommendation carries the marks</td></tr>
+          <tr><td>(e)</td><td>Ethics &amp; governance</td><td><span class="pill med">Medium</span></td><td>50 min</td><td>Untriggered; structure saves you</td></tr>
+          <tr><td>(f)</td><td>Tax — s19, s8F</td><td><span class="pill hard">Difficult</span></td><td>60 min</td><td>Provision-specific; easy to reach for the wrong section</td></tr>
+          <tr><td>(g)</td><td>Internal control</td><td><span class="pill med">Medium</span></td><td>45 min</td><td>Volume task — work the process flow line by line</td></tr>
+          <tr><td>(h)</td><td>Audit — ISA 570/500/705</td><td><span class="pill hard">Difficult</span></td><td>60 min</td><td>Ten procedures plus five paragraph errors in one sitting</td></tr>
+        </tbody>
+      </table>
+      <div class="callout danger"><strong>Do not front-load.</strong> Overspending on (a) and (b) is the single most reliable way to fail this paper. A "No attempt" on (h) is worse than a merely adequate (a).</div>
+    </section>
+    <!-- ===================== TASK A ===================== -->
+    <section id="task-a" class="card">
+      <h2><span class="pill task">Task (a)</span> Revenue — foreign sale with an FEC, and the "Eternal Flame"</h2>
+
+      <div class="approach">
+        <h5>Reading the task</h5>
+        <ul>
+          <li><strong>Audience:</strong> Monique Sithole, Head of Finance — a CA(SA). You may use technical language and standard references without explaining them from first principles.</li>
+          <li><strong>Components:</strong> ① check the accuracy of the journals; ② say what you <em>agree</em> with; ③ identify errors <em>and</em> omissions, with explanations; ④ for Contract 2, whether any revenue is recognised in FY2026 and, if so, how much, with reasons.</li>
+          <li><strong>Scope:</strong> "There's no need to do any calculations." That removes re-computation — it does <em>not</em> remove the obligation to notice that an amount does not agree to its own working.</li>
+          <li><strong>Trap:</strong> Contract 1 is an IAS 21 / IFRS 9 question, not an IFRS 15 question. Setting out the five-step model or defining "revenue" here wastes the time you need for Contract 2. Explaining <em>why</em> each item is wrong is what is being marked — "the rate is wrong" earns nothing without "because IAS 21 requires the spot rate at transaction date".</li>
+        </ul>
+      </div>
+
+      <div class="answer">
+        <div class="hdr">
+          <div><strong>From:</strong> Newly qualified CA(SA)</div>
+          <div><strong>To:</strong> Monique Sithole, Head of Finance</div>
+          <div><strong>Date:</strong> 5 August 2026</div>
+          <div><strong>Subject:</strong> RE: Revenue — Contract 1 journal review and Contract 2 recognition</div>
+        </div>
+
+        <p>Dear Monique</p>
+        <p>Thank you for sending these through. I have reviewed the proposed journals for Contract 1 and set out below what I agree with, the errors I have identified and the entries I believe have been omitted. My conclusion on Contract 2 follows. Please note I have not re-performed any calculations, as you asked, other than to point out one amount that does not agree to its own working.</p>
+
+        <h3 id="a-c1">Contract 1 — 1 000-carat parcel sold on 1 June 2026</h3>
+
+        <h4>What I agree with</h4>
+        <table>
+          <thead><tr><th style="width:34%">Item</th><th>Why it is correct</th></tr></thead>
+          <tbody>
+            <tr><td class="agree">Recognising revenue on 1 June 2026</td><td>This is the date the tender was awarded, which is the point at which control of the parcel passes to the buyer under our accounting policy. The timing of recognition is not in question here.</td></tr>
+            <tr><td class="agree">Recognising the receivable at the spot rate of R16.30 (R26 080 000)</td><td>Correct. IAS 21 requires a foreign currency transaction to be recorded on initial recognition at the spot rate ruling at the date of the transaction. W1 applies the right rate to the right quantity.</td></tr>
+            <tr><td class="agree">Recognising the FEC on the statement of financial position at 30 June</td><td>Correct in principle. A forward exchange contract is a derivative and must be recognised and measured at fair value, so an entry at reporting date is required. The error is in the <em>direction</em> and the <em>destination</em> of the gain, not in the fact that an entry is needed.</td></tr>
+            <tr><td class="agree">Using the 30 June spot rate as a proxy for the forward rate in measuring the FEC</td><td>Strictly, the fair value of an FEC is the difference between the contracted forward rate and the forward rate available at reporting date for the remaining term, discounted. With one day to maturity the forward rate is effectively the spot rate and discounting is immaterial, so the approach is acceptable. I would document that judgement in the file.</td></tr>
+          </tbody>
+        </table>
+
+        <h4>Errors</h4>
+        <table>
+          <thead><tr><th style="width:30%">Error</th><th>Explanation and correction</th></tr></thead>
+          <tbody>
+            <tr>
+              <td class="disagree">Revenue recognised at the June average rate of R16.38 (W2)</td>
+              <td>Revenue should be recognised at the spot rate on the transaction date, R16.30, giving R26 080 000 — the same amount as the receivable. An average rate is only permitted as a practical approximation where there is a large volume of transactions and rates do not fluctuate significantly. Neither applies: this is a single, dated, material transaction with a known spot rate, and exchange rate volatility is one of our five key risks. Revenue is currently <strong>overstated by R128 000</strong>. It is also internally inconsistent to translate the two legs of one transaction at two different rates.</td>
+            </tr>
+            <tr>
+              <td class="disagree">Foreign exchange loss of R128 000 recognised on 1 June (W3)</td>
+              <td>This is not an exchange difference — it is the balancing figure created by the error above. No exchange difference can arise on initial recognition, because both the debit and the credit are translated at the same rate on the same date. Exchange differences arise only on subsequent settlement or retranslation. <em>Correcting entry:</em> Dr Revenue R128 000 / Cr Foreign exchange loss (P/L) R128 000.</td>
+            </tr>
+            <tr>
+              <td class="disagree">The FEC treated as a liability and a loss</td>
+              <td>The FEC is a <strong>financial asset</strong> and gives rise to a <strong>gain</strong>. We have contracted to sell US$1.6 million at R16.55 when the market rate at 30 June is R16.42. We will therefore receive 13 cents more per dollar than the market would give us — the contract is favourable to us, so it is an asset. The entry as drafted reverses both the classification and the sign, and overstates the loss for the year at a time when our results are already under pressure.</td>
+            </tr>
+            <tr>
+              <td class="disagree">The fair value movement taken to other comprehensive income</td>
+              <td>It must go to <strong>profit or loss</strong>. A stand-alone derivative is measured at fair value through profit or loss under IFRS 9. Routing it through OCI is only available where the instrument has been formally designated and documented as a hedging instrument in a qualifying hedge relationship at inception, which we have not done. Nor would cash flow hedge accounting be available even if we wanted it: the hedged item here is a <em>recognised</em> monetary asset, not a highly probable forecast transaction. At most this could have been designated as a fair value hedge — and the fair value movements would still have gone to profit or loss.</td>
+            </tr>
+            <tr>
+              <td class="disagree">The amount of R272 000 does not agree to W4</td>
+              <td>W4 states 1 000 × 1 600 × (16.55 − 16.42), which is R208 000, not R272 000. R272 000 is US$1.6 million × (16.55 − 16.38) — the average rate appears to have been used a second time. The narration also describes the FEC as a liability, which compounds the classification error above. Please ask that this be re-performed and re-cast as a gain.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h4>Omissions</h4>
+        <table>
+          <thead><tr><th style="width:30%">Omitted</th><th>Explanation</th></tr></thead>
+          <tbody>
+            <tr>
+              <td class="disagree">Retranslation of the receivable at 30 June</td>
+              <td>The receivable is a monetary item and must be retranslated at the closing spot rate of R16.42, with the exchange difference recognised in profit or loss (IAS 21). The entry required is Dr Receivable / Cr Foreign exchange gain (P/L) of R192 000 (US$1.6m × R0.12). Without it the receivable is understated and profit or loss carries an exchange loss that does not exist.</td>
+            </tr>
+            <tr>
+              <td class="disagree">Expected credit loss on the receivable</td>
+              <td>The trade receivable is within the scope of IFRS 9 impairment and a loss allowance must be measured at year-end on a lifetime expected credit loss basis. This is not a formality for us — we recognised R207 million of impairments of financial assets in FY2026, against R27 million in FY2025. Please confirm the receivable has been included in the ECL model.</td>
+            </tr>
+            <tr>
+              <td class="disagree">Presentation and disclosure</td>
+              <td>The FEC should be presented as a current derivative financial asset, not netted against the receivable, and included in our IFRS 13 fair value hierarchy disclosure (Level 2 — valued using observable market rates) and our IFRS 7 market risk and sensitivity disclosures. Given that currency volatility is one of our five reported key risks, users will read this disclosure closely.</td>
+            </tr>
+            <tr>
+              <td class="disagree">Nothing further is required for FY2026</td>
+              <td>For completeness: settlement on 1 July 2026 falls in FY2027, so no further entry is needed in these financial statements. I mention it only so we do not look for one.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout info"><strong>One point worth putting to Jackie.</strong> The economics of this transaction are sound — between the receivable and the FEC we have fixed our rand proceeds at R26 480 000, which is exactly what the FEC was taken out to do. The problems above are recognition, classification and presentation errors, not a hedging problem. Net of the corrections, the FEC gain of R208 000 and the receivable retranslation gain of R192 000 largely offset the R128 000 revenue overstatement being reversed.</div>
+
+        <h3 id="a-c2">Contract 2 — the "Eternal Flame" 40-carat blue diamond</h3>
+
+        <p><strong>Conclusion first: no revenue should be recognised in FY2026.</strong> The US$700 000 deposit received on 20 June should be recognised as a contract liability at 30 June 2026, and the full US$2.7 million recognised as revenue in FY2027 on 15 July 2026. My reasons follow.</p>
+
+        <h4>The performance obligation is satisfied at a point in time</h4>
+        <p>There is a single performance obligation — to transfer the diamond. None of the over-time criteria are met: the Purchaser does not simultaneously receive and consume any benefit; we are not creating or enhancing an asset the Purchaser controls; and although the stone is highly specific, we do not have an enforceable right to payment for performance to date — the Purchaser could cancel and recover the deposit if verification failed. Revenue is therefore recognised at the point in time at which control transfers, and the question becomes <em>when</em> that is.</p>
+
+        <h4>Applying the indicators of transfer of control at 30 June 2026</h4>
+        <table>
+          <thead><tr><th style="width:26%">Indicator</th><th style="width:12%">Met?</th><th>Application to the facts on the day</th></tr></thead>
+          <tbody>
+            <tr><td>Present right to payment</td><td class="disagree">No</td><td>We held the US$700 000 deposit, but the US$2 000 000 balance was not due until 15 July. We did not have a present right to the consideration for the stone at the reporting date.</td></tr>
+            <tr><td>Legal title</td><td class="disagree">No</td><td>The contract expressly provides that legal title passes only once the final payment clears, which happened on 15 July.</td></tr>
+            <tr><td>Physical possession</td><td class="disagree">No, in substance</td><td>The stone was moved on 28 June to a <em>neutral</em> third-party vault in Switzerland, not to the Purchaser's premises. The Purchaser holds the only biometric keys to the viewing case, but is contractually prohibited from moving or selling the stone. Holding a key while being barred from using, moving or disposing of the asset is not possession in substance — the Purchaser can look at the diamond but cannot do anything with it. I have also considered whether this is a bill-and-hold arrangement: it is not, because the reason for the custody arrangement is our own protection pending payment and verification rather than a substantive request by the customer, and the stone was not ready for physical transfer while verification was outstanding.</td></tr>
+            <tr><td>Significant risks and rewards</td><td class="disagree">No, on balance</td><td>The contract passed the risk of accidental damage or theft to the Purchaser on 28 June, which points towards transfer. But two facts on the day cut the other way. First, we maintained our own global insurance policy on the stone until 15 July — we would not insure an asset we regarded as economically someone else's, and the Head of Finance's own note ("just in case") shows we considered ourselves exposed. Second, the risk transferred is narrow. Casualty risk in a high-security vault is remote; the risks that actually matter commercially — that the stone fails verification, and the price risk until then — remained with us.</td></tr>
+            <tr><td>Customer acceptance</td><td class="disagree">No</td><td>This is the decisive indicator. The sale was subject to a Final Scientific Verification, which only took place on 5 July, and the Purchaser could cancel and recover the deposit if the stone was not internally flawless. Because even minor flaws significantly affect value, this is a <em>substantive</em> acceptance clause, not an administrative formality, and we could not objectively determine at 30 June that the agreed specifications had been met — determining that was the whole purpose of the verification. That the stone passed on 5 July does not change the FY2026 position: we assess control on the facts available at the reporting date.</td></tr>
+          </tbody>
+        </table>
+
+        <p>Taken together, four of the five indicators point clearly against transfer, and the fifth is heavily qualified by our own insurance. Control passed on 15 July 2026, when the balance cleared, title passed and the stone was released to the Purchaser's vault — three things happening together. I want to be explicit that the conclusion is <em>not</em> "revenue follows payment": payment happens to coincide with the transfer of control in this contract, which will not always be the case.</p>
+
+        <h4>Consequences for the FY2026 financial statements</h4>
+        <ul class="clean">
+          <li><strong>Contract liability.</strong> The US$700 000 deposit is recognised as a current contract liability, not as revenue and not as a deposit received against a receivable. I note the contract describes it as non-refundable while also providing that the Purchaser could recover it if verification failed — it is therefore not truly non-refundable, which is a further indicator that the customer had not accepted the asset. We should not rely on the "non-refundable" label.</li>
+          <li><strong>Translation of the deposit.</strong> The contract liability is a <em>non-monetary</em> item, so it is not retranslated at 30 June — it stays at the spot rate on 20 June when the cash was received. Under IFRIC 22, that same 20 June rate is also the rate at which the portion of FY2027 revenue funded by the deposit will be measured; only the remaining US$2 million is translated at the 15 July spot rate. This is easily missed and gives a different revenue figure to translating the whole US$2.7 million at one rate.</li>
+          <li><strong>Inventory.</strong> The diamond remains in our inventory at 30 June. Its net realisable value is comfortably supported by the US$2.7 million contract price, so no write-down arises — a useful point given the pressure on inventory values elsewhere. The transport cost we paid is a fulfilment cost of the contract.</li>
+          <li><strong>Variable consideration.</strong> At 30 June the consideration was arguably variable and constrained, since the verification outcome could have ended the contract. The uncertainty resolved on 5 July, so there is no measurement consequence — but it reinforces why recognition at 30 June would have been wrong.</li>
+          <li><strong>Event after the reporting period.</strong> The conclusion of the sale on 15 July is a <em>non-adjusting</em> event after the reporting period: the conditions arose after year-end. US$2.7 million is approximately R44 million at the 30 June rate, which is about 2.4% of FY2026 revenue of R1 863 million, and the transaction is qualitatively material given the rarity of the stone and our current financial position. I recommend we disclose its nature and estimated financial effect.</li>
+          <li><strong>Going concern.</strong> The US$2.7 million was received in July and is real cash in the refinancing window. It should be reflected in the cash flow forecasts supporting the going concern assessment, and made available to KZL.</li>
+        </ul>
+
+        <p>Happy to talk any of this through, and to draft the correcting journals and the after-reporting-date note if that is useful.</p>
+        <p class="sig">Kind regards<br/>Newly qualified CA(SA)</p>
+      </div>
+    </section>
+    <!-- ===================== TASK B ===================== -->
+    <section id="task-b" class="card">
+      <h2><span class="pill task">Task (b)</span> Mine 2 — accounting for the three possible transactions</h2>
+
+      <div class="approach">
+        <h5>Reading the task</h5>
+        <ul>
+          <li><strong>Audience:</strong> Monique Sithole, Head of Finance.</li>
+          <li><strong>Components:</strong> for <em>each</em> of the three proposed treatments, advise <strong>with reasons</strong> whether the treatment is appropriate. There are three answers here, and a response that covers two well and one thinly will not be assessed as competent.</li>
+          <li><strong>Scope:</strong> high level, and <strong>ignore tax</strong>. "High level" means do not go into the mechanics of measuring fair value less costs to sell — it does <em>not</em> mean skipping the core principle of each standard, and it does not excuse failing to apply the specific dates and facts given.</li>
+          <li><strong>Trap:</strong> Transaction 3's proposal is about <em>employee costs</em>. Rehabilitation provisions, impairment and discontinued operations are all worth raising, but if they crowd out the employee-cost analysis you have answered a different question.</li>
+        </ul>
+      </div>
+
+      <div class="answer">
+        <div class="hdr">
+          <div><strong>From:</strong> Newly qualified CA(SA)</div>
+          <div><strong>To:</strong> Monique Sithole, Head of Finance</div>
+          <div><strong>Date:</strong> 5 August 2026</div>
+          <div><strong>Subject:</strong> RE: Accounting matters — Mine 2</div>
+          <div><strong>Attached:</strong> Feedback on the proposed accounting treatments</div>
+        </div>
+        <p>Dear Monique</p>
+        <p>Thank you for the opportunity to comment before this goes to the board. My feedback is attached. In short, none of the three proposed treatments is appropriate as drafted, and in each case the effect is that the accounting consequences arise <strong>earlier</strong> than proposed — which matters, because in each scenario something lands in FY2027 rather than waiting for the transaction to complete. I have kept the comments high level and ignored tax, as you asked. I have flagged at the end the two points I think the board needs to hear alongside the accounting.</p>
+        <p class="sig">Kind regards<br/>Newly qualified CA(SA)</p>
+
+        <hr/>
+        <p class="kicker">Attachment — Feedback on the proposed accounting treatments</p>
+
+        <h3 id="b-t1">Transaction 1 — Sale of Mine 2</h3>
+        <p><strong>Your proposal:</strong> the only impact is the derecognition of the related assets and liabilities when the mine is sold in August 2027.<br/>
+        <strong>My view: not appropriate.</strong> The accounting consequences begin when the mine is classified as held for sale, which on your timeline is likely to be around <strong>October 2026</strong>, not on completion in August 2027.</p>
+
+        <h4>Nothing changes in FY2026 — but check the dates</h4>
+        <p>At 30 June 2026 no decision had been taken; the board only considers the matter in October 2026. The FY2026 financial statements are therefore unaffected. However, if the board resolves to sell before those financial statements are authorised for issue, the resolution is a <em>non-adjusting</em> event after the reporting period and we would need to disclose its nature and estimated financial effect. Given the refinancing timetable, that is a real possibility and I would keep it on the reporting checklist.</p>
+
+        <h4>From board approval — IFRS 5 classification</h4>
+        <p>IFRS 5 applies once the carrying amount will be recovered principally through a sale transaction rather than through continuing use. Two criteria must be met:</p>
+        <ul class="clean">
+          <li><strong>Available for immediate sale in its present condition.</strong> This appears to be met. Mine 2 is already a separate cash-generating unit for impairment purposes, with its own PPE, receivables, inventory, payables, provisions and cash, and there is nothing in the proposal suggesting further work is needed before it could be sold as it stands.</li>
+          <li><strong>The sale must be highly probable.</strong> This requires management at an appropriate level of authority to be committed to a plan, an active programme to locate a buyer to have been initiated, active marketing at a price reasonable in relation to fair value, and completion expected within one year. On the facts you have given, all four are likely to fall into place in October 2026: the board resolution provides the commitment and authority, the search for a buyer follows immediately, the intention to market at around the recoverable amount supports a reasonable price, and the expected 10-month process is within twelve months. The fact that completion takes 10 months does not prevent classification — the period is based on our own and industry experience and is within the limit.</li>
+        </ul>
+
+        <h4>What classification actually does — and why the proposal understates the impact</h4>
+        <ul class="clean">
+          <li>Because the assets and liabilities will be disposed of together in a single transaction, Mine 2 is a <strong>disposal group</strong>. Its assets and its liabilities are presented separately on the face of the statement of financial position, and are not offset against each other.</li>
+          <li>The disposal group is remeasured to the <strong>lower of carrying amount and fair value less costs to sell</strong>, with any write-down recognised in profit or loss. I would flag that the recoverable amount used for the FY2026 impairment was most likely value in use; fair value less costs to sell is a different measure and we should not assume the two are equal. A further loss beyond the R333 million already recognised for Mine 2 is possible.</li>
+          <li><strong>Depreciation ceases</strong> on the mine's depreciable assets from classification. That alone changes FY2027 profit materially — group depreciation of mining assets was R675 million in FY2026.</li>
+          <li>Prior-period statement of financial position comparatives are <em>not</em> restated.</li>
+        </ul>
+
+        <h4>Discontinued operation</h4>
+        <p>We must also assess whether Mine 2 is a discontinued operation, and I expect it will be. It is one of only two mines we own, it generated R630 million of FY2026 revenue — about a third of the group — and it is separately reported in our revenue note. It is therefore a separate major line of business. The consequence is a separate single-line presentation of the post-tax result of the discontinued operation in profit or loss, with <em>comparatives re-presented</em>, and separate disclosure of its cash flows. This is the same presentation we applied to the Botswana mine, so the board has seen the effect before.</p>
+
+        <h4>On completion</h4>
+        <p>In August 2027 we derecognise the disposal group and recognise the difference between the net proceeds and the carrying amount in profit or loss — but by then most of the loss will already have been taken through the IFRS 5 remeasurement, so the completion entry should not be large. One caution from the Botswana sale: if the consideration is deferred or contingent on the mine's future cash flows, it must be recognised at <em>fair value</em>, which was assessed at nil in that case. If the buyer proposes similar terms here, the accounting outcome could be very different to the headline price, and the board should understand that before agreeing the structure.</p>
+
+        <h3 id="b-t2">Transaction 2 — KimberTrust contributes R400m for a 30% share</h3>
+        <p><strong>Your proposal:</strong> recognise a R400 million gain in profit or loss on 1 November 2026, and thereafter continue to recognise 100% of Mine 2's revenue and expenses.<br/>
+        <strong>My view: not appropriate on both counts.</strong></p>
+
+        <h4>This is a joint arrangement, and specifically a joint operation</h4>
+        <p>The arrangement gives Diamante and KT joint control: they are bound by a contractual arrangement, and KT "participates with Diamante to collectively direct all aspects relating to the operations of Mine 2" — that is, decisions about the relevant activities require the unanimous consent of both parties. Neither party controls Mine 2 unilaterally, and together the two hold all of it (70% / 30%).</p>
+        <p>A joint arrangement is then either a joint operation or a joint venture, depending on whether the parties have rights to the <em>assets and obligations for the liabilities</em>, or rights to the <em>net assets</em>. Here the agreement expressly gives KT a share of "30% of the assets and liabilities of Mine 2" and of the revenue and expenses thereafter. It is therefore a <strong>joint operation</strong>, and each party accounts for its share of the assets, liabilities, revenue and expenses. Equity accounting would only be correct for a joint venture.</p>
+        <p>Two cautions on classification. If the final agreement is instead structured through a separate incorporated vehicle, the legal form, the contractual terms and other facts and circumstances all have to be reassessed before concluding — a separate vehicle points towards a joint venture unless the terms reverse that. And KT is <strong>not</strong> a non-controlling interest: NCI only arises where we control a subsidiary, which is not the case if control is genuinely joint.</p>
+
+        <h4>The R400 million gain</h4>
+        <p>We should not recognise a R400 million gain. In substance we are disposing of a 30% interest in the assets and liabilities of Mine 2 for R400 million. On 1 November 2026 we <strong>derecognise 30% of the carrying amount of Mine 2's assets and liabilities</strong> and recognise the difference between the R400 million and the net carrying amount given up as a gain or loss in profit or loss. The gain is R400 million <em>less</em> 30% of Mine 2's net assets — which, given the R333 million impairment, could be a meaningful gain, but not the full R400 million. Recognising the whole amount would overstate profit by the carrying amount of what we have given up.</p>
+        <p>Thereafter we recognise only <strong>70%</strong> of Mine 2's revenue and expenses, and 70% of its assets and liabilities. Recognising 100% would overstate both revenue and costs and would misrepresent our interest in the mine to users who are focused on our production base.</p>
+
+        <h4>What I would want confirmed before finalising</h4>
+        <p>The description says KT contributes R400 million "towards funding the operations of Mine 2". Whether that cash is paid <em>to Diamante</em> or <em>into the mine</em> changes the analysis — in the second case part of the contribution funds jointly held assets rather than buying out our interest, and the gain would be smaller or absent. I would also want to know whether any part of the R400 million relates to future services or obligations we must still perform. Please could we see the draft agreement when it is available.</p>
+
+        <h3 id="b-t3">Transaction 3 — Closure of Mine 2</h3>
+        <p><strong>Your proposal:</strong> recognise a liability for all of Mine 2's employee costs relating to the closure when the mine closes in October 2027.<br/>
+        <strong>My view: not appropriate.</strong> The employee population has to be split, and for both groups the proposed timing is wrong.</p>
+
+        <h4>Employees who are redeployed</h4>
+        <p>These employees continue to render service to Diamante in their new roles, and their remuneration is not a termination benefit. Under IAS 19 the general principle applies: their costs are recognised as short-term employee benefits <em>as they render the service</em>. No liability is raised now, and certainly not in October 2027, for salaries they will earn in future periods — those are future operating costs, not a present obligation.</p>
+
+        <h4>Employees who are retrenched</h4>
+        <p>These amounts are termination benefits, and the obligating event is the termination of employment, not the service rendered. IAS 19 therefore requires recognition at the <strong>earlier</strong> of:</p>
+        <ul class="clean">
+          <li>the date on which we can no longer withdraw the offer of those benefits; and</li>
+          <li>the date on which we recognise the costs of a restructuring within the scope of IAS 37 that involves the payment of termination benefits.</li>
+        </ul>
+        <p>A restructuring provision arises under IAS 37 only once there is a detailed formal plan — identifying the operation concerned, the principal locations, the approximate number of employees to be compensated, the expenditure and the timing — <em>and</em> a valid expectation has been raised in those affected, either by starting to implement the plan or by announcing its main features to them. A board decision alone is expressly not enough. On your timeline, the trigger is most likely the point at which we announce the closure to, and conclude the negotiations with, the unions and employees. That is likely to fall in FY2027, well before October 2027. Deferring recognition to the closure date would understate our liabilities and overstate profit in the intervening period. Where settlement is expected wholly more than twelve months after the reporting period, the benefits are discounted and treated as other long-term benefits.</p>
+
+        <h4>Other consequences of closure — flagged, not analysed</h4>
+        <p>You asked about employee costs specifically, so I have dealt with those first. For completeness, the closure decision would also require us to consider:</p>
+        <ul class="clean">
+          <li><strong>Rehabilitation and decommissioning.</strong> Closing earlier changes both the amount and the timing of the obligation. Our provisions currently stand at R558 million non-current and R63 million current, and a revision under IAS 37 and IFRIC 1 could be significant.</li>
+          <li><strong>Asset lives and impairment.</strong> Mining assets depreciated over a units-of-production basis will need their remaining reserve base and useful lives revised, and closure is itself an impairment indicator.</li>
+          <li><strong>Discontinued operations.</strong> An asset to be abandoned is <em>not</em> classified as held for sale, but Mine 2 would still be presented as a discontinued operation from the date it ceases to be used.</li>
+          <li><strong>Onerous contracts.</strong> Any supply or offtake commitments we can no longer fulfil from Mine 2 would need assessment.</li>
+        </ul>
+
+        <div class="callout warn"><strong>Two points for the board, beyond the accounting.</strong> First, whichever route is chosen, the decision and its timing feed directly into the going concern assessment and into what we tell KZL and our lenders — the bank commitment is conditional and our lenders will read a Mine 2 decision as information about the sustainability of the business. Second, the three options have very different cash profiles: a sale brings in consideration that may be deferred, the KT partnership brings in R400 million of third-party cash against a R333 million cash balance, and closure <em>costs</em> cash in retrenchment and accelerated rehabilitation. That difference may matter more to the refinancing than the accounting does.</div>
+      </div>
+    </section>
+    <!-- ===================== TASK C ===================== -->
+    <section id="task-c" class="card">
+      <h2><span class="pill task">Task (c)</span> Critical review of the proposed long-term incentive KPIs</h2>
+
+      <div class="approach">
+        <h5>Reading the task</h5>
+        <ul>
+          <li><strong>Audience:</strong> two of them. Jackie Brits asked you to <em>draft a response for her to review before sending it on</em> to Lavashni Govender, a newly appointed independent non-executive director and incoming chair of the remuneration committee. So the deliverable is a short covering note to Jackie plus a draft reply written in Jackie's voice, to a director — formal, respectful, no jargon assumed.</li>
+          <li><strong>Components:</strong> ① confirm the information Lavashni gathered; ② critically review the current KPIs for appropriateness; ③ recommend <em>at least three</em> new KPIs, each with a brief explanation.</li>
+          <li><strong>Context to use:</strong> the JSE rules on remuneration dissent, mentioned by Jackie on the day, and last year's AGM dissent. Both are there for a reason.</li>
+          <li><strong>Trap:</strong> IFRS 2 is <em>not</em> asked. Reviewing KPIs as five independent items, rather than as a set, is the error the markers single out — and generic criticism ("can be manipulated") earns nothing without the Diamante-specific reason.</li>
+        </ul>
+      </div>
+
+      <div class="answer">
+        <div class="hdr">
+          <div><strong>From:</strong> Newly qualified CA(SA)</div>
+          <div><strong>To:</strong> Jackie Brits, CFO</div>
+          <div><strong>Date:</strong> 5 August 2026</div>
+          <div><strong>Subject:</strong> RE: FW: Performance bonuses — draft reply to Lavashni Govender</div>
+        </div>
+        <p>Hi Jackie</p>
+        <p>A draft reply to Lavashni is below for your review. Her summary of the scheme is accurate, so I have confirmed it and then gone straight to the substance.</p>
+        <p>Two things you may want to decide before it goes: first, how far you want to go on quantum — I have raised the 3-to-5-times-salary multiple and the optics of a management scheme while all staff bonuses are paused, but that is a Remco and board judgement rather than mine. Second, I have flagged that a share issue to the CEO needs shareholder approval under section 41 of the Companies Act and is likely to need approvals under the JSE Listings Requirements; you may prefer to confirm that with the company secretary and our sponsor first so that Lavashni receives a settled position rather than a query.</p>
+        <p>The single most important point is the one about KPI 2: we are loss-making, so a "net profit growth of at least 5%" target cannot actually be measured. I would not want that to reach the AGM.</p>
+        <p class="sig">Kind regards<br/>Newly qualified CA(SA)</p>
+
+        <hr/>
+        <p class="kicker">Draft reply — for Jackie Brits to send to Lavashni Govender</p>
+
+        <div class="email-box">
+          <div class="email-header">
+            <div><strong>To:</strong> Lavashni Govender, Independent non-executive director</div>
+            <div><strong>From:</strong> Jackie Brits, Chief Financial Officer</div>
+            <div><strong>Date:</strong> 6 August 2026</div>
+            <div><strong>Subject:</strong> RE: Performance bonuses — proposed long-term incentive scheme</div>
+          </div>
+
+          <p>Dear Lavashni</p>
+          <p>Thank you for sending this ahead of your return, and congratulations on taking over as chair of the remuneration committee. I can confirm that your understanding of the proposed scheme is correct and consistent with the proposed policy for the CEO's performance bonus.</p>
+          <p>Because the policy has not yet been finalised, I have taken the opportunity to set out some concerns with the KPIs as drafted, and some suggested replacements, for the committee's consideration. Given the level of dissent on remuneration at the last AGM and the requirement to engage with shareholders where a significant proportion vote against the remuneration policy or implementation report, I think it is worth Remco reworking these before they are tabled.</p>
+
+          <h4 id="c-design">Two design points that sit above the KPIs</h4>
+          <ul class="clean">
+            <li><strong>The share award does not align management with shareholders.</strong> As drafted, the number of shares is determined <em>at the vesting date</em> using the share price at that date. The effect is that the rand value of the award is fixed and the number of shares floats — so management receives the same value whether our share price has doubled or halved. That removes the very alignment a share-settled scheme is meant to create. I would recommend fixing the <em>number</em> of shares at grant date (the rand value divided by the grant-date price), so that management shares in both the upside and the downside of the share price, as our shareholders do.</li>
+            <li><strong>The vesting profile is short for a "long-term" incentive.</strong> Annual vesting over three years rewards three consecutive single years rather than sustained performance. I would suggest a three-year performance period with a single vesting date, or annual vesting with a further holding period before the shares can be sold, together with malus and clawback provisions. I would also recommend a <em>gateway</em> condition: no award vests at all unless the refinancing has been concluded, which reflects the reality that nothing else management achieves in FY2027 matters if that is not delivered.</li>
+          </ul>
+          <p>There are also two process points. Because the CEO is a director, the issue of shares to him requires approval by special resolution under section 41 of the Companies Act, and the scheme and any amendments will require shareholder approval under the JSE Listings Requirements; I am confirming the detail with our company secretary and sponsor. And the committee should be conscious that we are proposing to issue shares — diluting existing holders — immediately ahead of a rights issue in which we will be asking those same shareholders for capital. Shareholders A and B, who together hold 54% and whose agreement we need for the refinancing, will read the two together.</p>
+          <p>Finally, a point of judgement rather than governance: bonuses have been paused for all staff until the refinancing is resolved, and we may yet have to retrench employees at Mine 2. A scheme worth three to five times salary for management, introduced in that period, will be difficult to explain internally and externally unless the committee can articulate clearly why it is necessary and how it is conditional on the company's recovery.</p>
+
+          <h4 id="c-review">The five proposed KPIs</h4>
+          <table>
+            <thead><tr><th style="width:24%">KPI</th><th>Assessment</th></tr></thead>
+            <tbody>
+              <tr>
+                <td class="disagree"><strong>1.</strong> Mining cost growth (excluding impairments) remains below inflation</td>
+                <td>The intention is right — cost control is genuinely within management's control, which is more than can be said for the diamond price, and excluding impairments sensibly removes a judgement-driven, non-cash item. But as drafted it measures <em>total</em> mining costs, and total costs fall when we mine less. Our FY2026 mining costs fell from R2 817 million to R2 295 million largely because activity fell, not because the business became more efficient. Management could meet this target simply by curtailing production, which is the opposite of what we want. "Inflation" is also undefined: mining input inflation — electricity, diesel, labour — has run consistently ahead of headline CPI, so measuring against CPI sets a target we are unlikely ever to hit, and measuring against a soft index makes it meaningless.<br/><em>Suggested amendment:</em> "Growth in cash operating cost per carat recovered, by mine, below the mining producer price index."</td>
+              </tr>
+              <tr>
+                <td class="disagree"><strong>2.</strong> Net profit growth of at least 5%</td>
+                <td>This KPI cannot be applied. Diamante made a <strong>loss</strong> of R1 044 million in FY2026 and R963 million in FY2025. "Growth of at least 5%" measured from a negative base has no meaningful interpretation — on a literal reading, a loss that is 5% larger would satisfy it. This needs to come out regardless of what replaces it.<br/>Even on a positive base, net profit is the wrong measure for us. FY2026 profit includes a R405 million profit arising from derecognising the net liabilities of the Botswana mine for nil consideration, and R963 million of impairments — neither tells shareholders anything about how well the business was run, and both involve management judgement, which is precisely what a remuneration metric should avoid. More fundamentally, the main driver of profit is the rough diamond price, which management cannot control, and our own strategy is deliberately to withdraw from tenders when our reserve price is not met. A net profit target therefore penalises management for executing the strategy the board has approved.</td>
+              </tr>
+              <tr>
+                <td class="disagree"><strong>3.</strong> Number of high-value diamonds as a % of total diamonds mined</td>
+                <td>The alignment with value-led production is correct in principle, and I would keep the idea. Two problems with the measure. First, it is based on diamonds <em>mined</em>, and the grade profile of the ore body is geology rather than management performance — management's actual levers are mine planning and sequencing, recovery efficiency, and how parcels are composed and offered. Second, "number of diamonds" is the wrong unit: value is a function of carats and quality, not count. A single 40-carat stone is worth more than several thousand small ones, but would move this ratio in the wrong direction.<br/><em>Suggested amendment:</em> "High-grade carats recovered per tonne milled, against the mine plan", which holds management to the recovery and planning decisions they actually make.</td>
+              </tr>
+              <tr>
+                <td class="disagree"><strong>4.</strong> Reduction in inventories</td>
+                <td>It is not clear whether this means rand value or carats, and the two move for quite different reasons. In rand terms our inventories fell from R459 million to R315 million, and part of that reflects lower carrying values as prices fell and stock was written down to net realisable value — rewarding management for a price-driven write-down would be perverse. In carats, a reduction is positive if it reflects sales into a firm market, but the KPI would push management to sell into a weak one, eroding price, which is exactly the behaviour our tender strategy is designed to prevent.<br/><em>Suggested amendment:</em> if the objective is cash, measure cash directly (see KPI B below). If the objective is stock discipline, measure "carats of finished goods held above the agreed target level", with an explicit carve-out for volumes deliberately withheld under the board-approved marketing strategy.</td>
+              </tr>
+              <tr>
+                <td class="disagree"><strong>5.</strong> EY Excellence in Integrated Reporting rating</td>
+                <td>This does not measure ESG performance. It measures the quality of our integrated <em>reporting</em> — how well we describe what we do, not what we actually achieve on emissions, water, tailings, safety or communities. A company can be rated highly while performing poorly, and the incentive it creates is to invest in the report rather than in the outcomes. That is a reputational risk in itself, particularly alongside the sustainability marketing campaign currently being considered. It is also awarded by a third party against criteria we do not set, on a timetable we do not control, and it is not capable of being measured and verified for a defined performance year in the way a remuneration outcome must be.<br/><em>Suggested amendment:</em> replace with a small number of measurable ESG outcomes drawn from commitments we have already made publicly (see KPIs D and E below).</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h4>The set as a whole</h4>
+          <p>Individual KPIs matter less than how they work together, and as a set these five have three problems:</p>
+          <ul class="clean">
+            <li><strong>They are concentrated, not broad.</strong> KPIs 1, 2 and 4 are three different expressions of short-term reported earnings. That gives narrow coverage and makes the scheme easier to game, because a single lever moves several measures at once.</li>
+            <li><strong>They pull against each other and against strategy.</strong> KPI 1 rewards mining less; KPI 3 rewards mining more of the best material; KPI 4 rewards selling inventory; and our approved strategy says withhold from tenders when prices are weak. Management cannot satisfy all four honestly.</li>
+            <li><strong>They omit what matters most in FY2027.</strong> There is no measure of liquidity, no measure of the refinancing on which the company's going concern depends, no safety measure, no capital discipline measure, and nothing on the Mine 2 restructuring.</li>
+          </ul>
+          <p>Weightings, threshold and stretch targets, the data source for each measure and who verifies the outcome are also not yet specified. I would suggest Remco sets these explicitly, and that the ESG measures in particular are subject to independent assurance, so that outcomes cannot be disputed after the fact.</p>
+
+          <h4 id="c-new">Recommended KPIs</h4>
+          <p>The following are specific, measurable and, importantly, within management's control. I would suggest the committee select four or five and weight them.</p>
+          <table>
+            <thead><tr><th style="width:26%">KPI</th><th style="width:26%">How it is measured</th><th>Why it is right for Diamante</th></tr></thead>
+            <tbody>
+              <tr><td><strong>A. Refinancing concluded</strong></td><td>Bank facility maturity extended to 2030, amended shareholder loan agreements signed, and the rights issue fully subscribed, by an agreed date. Binary.</td><td>This is the single most consequential thing the company must achieve, and our going concern status depends on it. I would make it a gateway condition rather than one measure among five: if it is not achieved, nothing vests.</td></tr>
+              <tr><td><strong>B. Cash generated from operations against budget, and closing liquidity</strong></td><td>Cash generated from operations before capital expenditure versus the board-approved budget, together with a minimum closing cash balance.</td><td>Liquidity, not profit, is our binding constraint — R3 357 million of current liabilities against R1 017 million of current assets. Cash is directly controllable through cost, working capital and capital allocation decisions, and it is what our lenders actually monitor.</td></tr>
+              <tr><td><strong>C. Cash operating cost per carat recovered</strong></td><td>Per mine, measured against the mining producer price index, excluding impairments.</td><td>Replaces KPI 1 and removes the volume distortion: management can only improve it by running the mines better, not by running them less.</td></tr>
+              <tr><td><strong>D. Value realised per carat sold, and tender discipline</strong></td><td>Average revenue realised per carat sold against the planned grade mix for the parcels offered, plus the percentage of parcels sold at or above the reserve price.</td><td>This is value-led production expressed as a measure. It rewards the quality of what we recover and how well we market it, while respecting our right to withdraw from weak tenders — so it supports the strategy instead of fighting it, which KPIs 2 and 4 currently do.</td></tr>
+              <tr><td><strong>E. Safety</strong></td><td>Zero fatalities, and an agreed percentage reduction in the lost-time injury frequency rate against the FY2026 baseline.</td><td>Non-negotiable in mining and central to our licence to operate. It also matters internally: it is the clearest signal we can give employees that their safety counts, at a time when their bonuses are paused and Mine 2's future is uncertain.</td></tr>
+              <tr><td><strong>F. Environmental delivery against existing commitments</strong></td><td>Scope 1 and 2 emissions on track for the committed 35–40% reduction by 2030; percentage of approved rehabilitation plan milestones completed on schedule; zero significant tailings or environmental incidents and no regulatory non-compliance notices.</td><td>Replaces KPI 5 with genuine ESG performance. Each measure maps onto a commitment we have already made publicly and onto the environmental risk in our own risk register, so we are holding management to what we have told the market we will do.</td></tr>
+              <tr><td><strong>G. Capital projects delivered</strong> <span class="note">(optional)</span></td><td>Approved FY2027 mine development delivered on schedule and within approved capital budget.</td><td>Capital is scarce and about to become scarcer. This holds management accountable for spending it as approved, which is directly relevant to the Mine 1 development decision now in front of the board.</td></tr>
+            </tbody>
+          </table>
+
+          <p>I would be happy to work through these with you and the committee, and to bring the AGM voting outcome and the previous remuneration report to that discussion so that you can see exactly where the dissent came from.</p>
+          <p class="sig">Kind regards<br/>Jackie Brits<br/>Chief Financial Officer, Diamante Ltd</p>
+        </div>
+      </div>
+    </section>
+    <!-- ===================== TASK D ===================== -->
+    <section id="task-d" class="card">
+      <h2><span class="pill task">Task (d)</span> Which Mine 1 development block to prioritise for FY2027</h2>
+
+      <div class="approach">
+        <h5>Reading the task</h5>
+        <ul>
+          <li><strong>Audience:</strong> an email to Monique Sithole (cc Jackie Brits), but written knowing the content goes to the <em>Board</em>. Pitch the judgement at board level; put the arithmetic in an attachment.</li>
+          <li><strong>Components:</strong> ① a recommendation on which opportunity to prioritise; ② supporting calculations; ③ qualitative considerations for presentation to the Board.</li>
+          <li><strong>Scope — read this twice:</strong> the pack says three times that this is an <strong>initial screening assessment</strong> relating to the <strong>first full year</strong> of incremental production, and that it is <em>not</em> a full life-of-mine appraisal. Building a DCF, an NPV or an IRR is answering a question that was not asked, and the time it costs comes out of tasks (f), (g) and (h).</li>
+          <li><strong>The technical hurdle:</strong> relevant costing. Two items decide this task — the R8 million consultant fee (sunk) and the existing drill rig (avoidable cost <em>and</em> opportunity cost). Every adjustment must appear consistently on both sides of the comparison.</li>
+          <li><strong>The real test:</strong> the two blocks come out R0.4 million apart. When the numbers are that close, the recommendation has to be carried by judgement — and it must still be a clear recommendation the Board can act on, not a list of factors.</li>
+        </ul>
+      </div>
+
+      <div class="answer">
+        <div class="hdr">
+          <div><strong>From:</strong> Newly qualified CA(SA)</div>
+          <div><strong>To:</strong> Monique Sithole, Head of Finance</div>
+          <div><strong>Cc:</strong> Jackie Brits, Chief Financial Officer</div>
+          <div><strong>Date:</strong> 5 August 2026</div>
+          <div><strong>Subject:</strong> FY2027 Mine 1 development — recommendation on prioritisation</div>
+          <div><strong>Attached:</strong> (1) Screening calculation · (2) Relevant costing basis · (3) Sensitivity · (4) Qualitative considerations</div>
+        </div>
+
+        <p>Dear Monique</p>
+        <p><strong>I recommend that Block B — the East Deepening Project — be prioritised for detailed FY2027 planning and initial capital allocation, using our existing drill rig, and subject to two conditions set out below.</strong></p>
+        <p>The headline the Board needs is this: on a first-year screening basis the two blocks are financially <em>indistinguishable</em> — Block A shows an indicative net benefit of R31.4 million and Block B R31.0 million, a difference of R0.4 million, or 1.3%. That gap is far smaller than the margin of error in the underlying grade and cost estimates, so the numbers on their own cannot decide this. The decision has to be made on judgement, and on that basis Block B is the better choice, for one reason above all others: <strong>Block B is the option that gets materially worse if we wait, and Block A is not.</strong> Deferring Block B costs an extra R30 million of capital and delays first production by 18 months. Deferring Block A costs nothing.</p>
+        <p>The two conditions I would attach are:</p>
+        <ol>
+          <li><strong>Stage the capital and make the main commitment conditional on the refinancing.</strong> Approve the development study and early works now; commit the balance only once the rights issue and the amended loan agreements are concluded. Block B absorbs roughly R28 million more FY2027 cash than Block A does, which is not trivial against a R333 million cash balance and a conditional bank commitment.</li>
+          <li><strong>Confirm the grade before the main capital is committed.</strong> Block B's entire case rests on the estimate that 65% of its carats are high-grade, drawn from admittedly less extensive drilling. As Attachment 3 shows, at exactly 65% Block B and Block A are level — there is no margin. I would run an infill drilling programme during the development study and revisit the decision if the confirmed profile falls below that.</li>
+        </ol>
+        <p>If the Board concludes that protecting FY2027 liquidity must override everything else while the refinancing is in progress, then Block A plus the immediate sale of the drill rig for R18 million is a defensible alternative — but I would ask that it be paired with an explicit decision on <em>when</em> Block B is revisited, so that the R30 million escalation is a cost the Board has chosen rather than one that accrues by default.</p>
+        <p class="sig">Kind regards<br/>Newly qualified CA(SA)</p>
+
+        <hr/>
+        <p class="kicker" id="d-calc">Attachment 1 — Screening calculation (first full year of incremental production)</p>
+
+        <h4>Step 1 — Expected value per carat, weighted by the expected grade mix</h4>
+        <table class="calc">
+          <thead><tr><th>Grade category</th><th class="num">Value per carat</th><th class="num">Block A mix</th><th class="num">Block A</th><th class="num">Block B mix</th><th class="num">Block B</th></tr></thead>
+          <tbody>
+            <tr><td>High-grade</td><td class="num">R11 000</td><td class="num">—</td><td class="num">—</td><td class="num">65%</td><td class="num">R7 150</td></tr>
+            <tr><td>Moderate-grade</td><td class="num">R5 000</td><td class="num">90%</td><td class="num">R4 500</td><td class="num">—</td><td class="num">—</td></tr>
+            <tr><td>Low-grade</td><td class="num">R2 000</td><td class="num">10%</td><td class="num">R200</td><td class="num">35%</td><td class="num">R700</td></tr>
+            <tr class="total"><td>Expected value per carat</td><td class="num"></td><td class="num">100%</td><td class="num">R4 700</td><td class="num">100%</td><td class="num">R7 850</td></tr>
+          </tbody>
+        </table>
+
+        <h4>Step 2 — First-year contribution</h4>
+        <table class="calc">
+          <thead><tr><th>Metric</th><th class="num">Block A</th><th class="num">Block B</th><th>Basis</th></tr></thead>
+          <tbody>
+            <tr><td>Expected production (carats)</td><td class="num">36 000</td><td class="num">24 000</td><td>Per the consultants' review</td></tr>
+            <tr><td>Expected value per carat</td><td class="num">R4 700</td><td class="num">R7 850</td><td>Step 1</td></tr>
+            <tr><td>Expected revenue</td><td class="num">R169 200 000</td><td class="num">R188 400 000</td><td>Carats × value per carat</td></tr>
+            <tr><td>Variable mining and processing costs</td><td class="num">(R82 800 000)</td><td class="num">(R74 400 000)</td><td>36 000 × R2 300 / 24 000 × R3 100</td></tr>
+            <tr class="total"><td>Contribution</td><td class="num">R86 400 000</td><td class="num">R114 000 000</td><td>Block B ahead by R27 600 000</td></tr>
+          </tbody>
+        </table>
+
+        <h4>Step 3 — Relevant development expenditure</h4>
+        <table class="calc">
+          <thead><tr><th>Metric</th><th class="num">Block A</th><th class="num">Block B</th><th>Basis</th></tr></thead>
+          <tbody>
+            <tr><td>Development capital expenditure per the pack</td><td class="num">R55 000 000</td><td class="num">R95 000 000</td><td>As budgeted</td></tr>
+            <tr><td>Less: new drilling equipment avoided</td><td class="num">—</td><td class="num">(R30 000 000)</td><td>Not required if the existing rig is used</td></tr>
+            <tr><td>Add: opportunity cost of the existing rig</td><td class="num">—</td><td class="num">R18 000 000</td><td>Sale proceeds forgone by using it</td></tr>
+            <tr class="total"><td>Relevant development expenditure</td><td class="num">R55 000 000</td><td class="num">R83 000 000</td><td>Block B requires R28 000 000 more</td></tr>
+          </tbody>
+        </table>
+
+        <h4>Step 4 — Indicative first-year net benefit</h4>
+        <table class="calc">
+          <thead><tr><th>Metric</th><th class="num">Block A</th><th class="num">Block B</th></tr></thead>
+          <tbody>
+            <tr><td>Contribution (Step 2)</td><td class="num">R86 400 000</td><td class="num">R114 000 000</td></tr>
+            <tr><td>Less: relevant development expenditure (Step 3)</td><td class="num">(R55 000 000)</td><td class="num">(R83 000 000)</td></tr>
+            <tr class="total"><td>Indicative net benefit</td><td class="num">R31 400 000</td><td class="num">R31 000 000</td></tr>
+            <tr><td>Advantage / (disadvantage) versus Block A</td><td class="num">—</td><td class="num">(R400 000)</td></tr>
+          </tbody>
+        </table>
+        <p class="note">This is a relative screening indicator, not a net present value. It compares one year of incremental contribution against the capital required to unlock it, on the basis the consultants prepared. It is deliberately not discounted, does not extend beyond the first full year, and should not be presented to the Board as a return on the project.</p>
+
+        <p class="kicker" id="d-relevant">Attachment 2 — Relevant costing basis</p>
+        <table>
+          <thead><tr><th style="width:26%">Item</th><th style="width:16%">Treatment</th><th>Reason</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>R8 million geological reassessment fees</td>
+              <td class="disagree">Excluded from both</td>
+              <td>The fees have already been incurred and cannot be changed by this decision. They are a sunk cost and are irrelevant to the choice between the blocks. I would specifically caution against the request to allocate them to whichever project the Board approves: it would make the chosen block appear worse for no economic reason, and if applied inconsistently it would distort the comparison itself. How the R8 million is treated for financial reporting purposes is a separate question, decided on its own merits and unaffected by which block we pick.</td>
+            </tr>
+            <tr>
+              <td>R30 million new specialised drilling equipment</td>
+              <td class="disagree">Deducted from Block B</td>
+              <td>This expenditure is avoidable. The operations team has confirmed the existing rig is technically suitable for Block B, so the R30 million is only incurred if we choose not to use it. It is therefore not a relevant cost of Block B.</td>
+            </tr>
+            <tr>
+              <td>R18 million sale value of the existing drill rig</td>
+              <td class="disagree">Added to Block B</td>
+              <td>Using the existing rig is not free. The rig is not needed for the currently approved Mine 1 operations and could be sold immediately for R18 million if Block B is not selected. That forgone R18 million is the opportunity cost of committing the rig to Block B and must be charged to it. The rig's carrying amount, whatever it is, is irrelevant — only future cash flows that change as a result of the decision count.</td>
+            </tr>
+            <tr>
+              <td>R20 million incremental rehabilitation for Block B</td>
+              <td class="partial">Excluded from the screening; disclosed to the Board</td>
+              <td>This is a genuine incremental cost caused by Block B, but it is incurred at mine closure — around 15 years away. Including it undiscounted in a one-year screening comparison would overstate its effect; excluding it without saying so would understate Block B's true cost. It must be brought into the full life-of-mine appraisal on a discounted basis, where its present value will be modest relative to recurring annual contribution of over R100 million. It will also increase our IAS 37 rehabilitation provision from the point the obligation arises, which is worth flagging given that provisions already stand at R621 million and our balance sheet is under scrutiny.</td>
+            </tr>
+            <tr>
+              <td>Existing Mine 1 production, allocated overheads, depreciation of the new capex</td>
+              <td class="disagree">Excluded</td>
+              <td>Existing production and allocated overheads are unaffected by the decision and are therefore not incremental. Depreciation is excluded because it is a non-cash accounting allocation of the same capital expenditure already charged in full in Step 3 — including both would double-count.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p class="kicker" id="d-sens">Attachment 3 — Sensitivity: the point the Board most needs to see</p>
+        <p>The blocks are R0.4 million apart, so the sensible question is not "which number is bigger" but "how much would have to be wrong for the answer to change".</p>
+        <ul class="clean">
+          <li><strong>Block B's case depends entirely on the 65% high-grade assumption.</strong> Each percentage point by which the high-grade proportion falls short costs R9 000 per carat (the R11 000 to R2 000 spread) on 1% of 24 000 carats — <strong>R2.16 million of contribution per year</strong>. Block B falls behind Block A at a high-grade proportion of approximately <strong>65.2%</strong>. In other words, the estimate has effectively <em>no</em> margin of safety: any adverse variance in grade puts Block B behind on the screening measure.</li>
+          <li><strong>Block A is far less exposed.</strong> Its grade profile is supported by extensive drilling data that management considers reliable, and its mix spans moderate and low-grade stones, where the value spread is R5 000 against R2 000 rather than R11 000 against R2 000. The same proportionate estimation error therefore moves Block A's outcome by roughly a third as much.</li>
+          <li><strong>The asymmetry cuts the other way on timing.</strong> Block B's development cost rises from R95 million to about R125 million if deferred, and first production slips by roughly 18 months. Block A shows no such deterioration. So while Block B carries more estimation risk, it is also the only one of the two that is destroyed by delay.</li>
+        </ul>
+        <div class="callout info"><strong>The cash position, stated plainly.</strong> The screening measure is not the same as the cash we must find in FY2027. On a cash basis: Block A requires R55 million out and permits the rig to be sold for R18 million in, a net outflow of <strong>R37 million</strong>. Block B, using the existing rig, requires R65 million out and forgoes the R18 million, a net outflow of <strong>R65 million</strong> — about R28 million more, at the point at which we are asking our bank and our shareholders for support. Against that, prioritising Block B now avoids around R30 million of future escalation and brings production forward 18 months. The Board is therefore trading roughly R28 million of near-term liquidity for roughly R30 million of avoided future cost plus earlier cash flows. That trade is defensible — but only if the near-term cash can be found, which is why I have recommended staging the commitment behind the refinancing.</div>
+
+        <p class="kicker" id="d-qual">Attachment 4 — Qualitative considerations for the Board</p>
+        <table>
+          <thead><tr><th style="width:22%">Consideration</th><th style="width:39%">Block A — North Extension</th><th style="width:39%">Block B — East Deepening</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><strong>Strategic alignment</strong></td>
+              <td>Delivers volume — 36 000 carats at R4 700 each. Closer to a "maximise carats" approach than to the value-led strategy the Board has adopted.</td>
+              <td class="agree">Delivers value — R7 850 per carat, with 65% high-grade material. This is value-led production in the literal sense, and it directly addresses the product mix weakness that management has identified as a cause of our recent underperformance.</td>
+            </tr>
+            <tr>
+              <td><strong>Mine life</strong></td>
+              <td>Maintains Mine 1's remaining life at approximately 12 years — the block sits within the existing planning horizon.</td>
+              <td class="agree">Extends Mine 1's remaining life from 12 to approximately 15 years. Life of mine is a stated Board focus area and matters beyond the mine itself: it supports the going concern assessment, the value lenders and investors place on our asset base, and our resource availability once the market recovers.</td>
+            </tr>
+            <tr>
+              <td><strong>Cost of deferral</strong></td>
+              <td class="agree">None expected. Block A remains available on unchanged terms if it is not prioritised now.</td>
+              <td>Capital rises from R95 million to approximately R125 million — a 32% increase — through remobilisation, inflation and additional access work, and first production is delayed by around 18 months. The opportunity does not improve with waiting.</td>
+            </tr>
+            <tr>
+              <td><strong>Execution and geological risk</strong></td>
+              <td class="agree">Near-surface and adjacent to existing operations: shorter lead time, simpler development, lower execution risk, and a grade profile supported by extensive drilling.</td>
+              <td>Deeper development requiring shaft deepening, pumping infrastructure and underground support. Longer to first production, greater exposure to the geological and equipment failure risk already in our risk register, and to water access constraints. Geological data is less extensive.</td>
+            </tr>
+            <tr>
+              <td><strong>Capital and liquidity</strong></td>
+              <td class="agree">R55 million, and releases R18 million from the rig sale. Net FY2027 cash impact of R37 million.</td>
+              <td>R65 million using the existing rig, and forgoes the R18 million. Net FY2027 cash impact of R65 million during the refinancing window.</td>
+            </tr>
+            <tr>
+              <td><strong>Operational dependency</strong></td>
+              <td>Does not require the drill rig.</td>
+              <td>Depends on a single specialised rig with no redundancy. If it fails, the development stalls — a maintenance and contingency plan should be a condition of approval.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h4>Information I would want before the full life-of-mine appraisal</h4>
+        <ul class="clean">
+          <li>Full life-of-mine production and cost profiles for both blocks — the first year alone tells us nothing about whether that year is representative, a ramp-up year or a peak.</li>
+          <li>The expected date of first production for each block, and the phasing of the development capital. Block A is near-surface and should produce sooner, but the pack does not say by how much, and on a decision this close, timing alone could change the answer.</li>
+          <li>The resource classification underlying each grade estimate — measured, indicated or inferred — and the confidence range around Block B's 65% assumption.</li>
+          <li>The discount rate, and the diamond price and exchange rate assumptions to be used for the full appraisal. The screening assumes constant prices and a constant US$/ZAR rate, which is a significant simplification for a business whose revenue is in dollars and costs in rands.</li>
+          <li>Whether the two blocks compete for the same processing capacity, skilled labour or water allocation — if they do, they are not independent options and a phased approach may not be available.</li>
+          <li>Any restriction on capital expenditure in the bank commitment agreement or in the proposed amended shareholder loan terms. It would be unfortunate to approve capital that we have contractually undertaken not to spend.</li>
+        </ul>
+      </div>
+    </section>
+    <!-- ===================== TASK E ===================== -->
+    <section id="task-e" class="card">
+      <h2><span class="pill task">Task (e)</span> The proposed sustainability marketing campaign</h2>
+
+      <div class="approach">
+        <h5>Reading the task</h5>
+        <ul>
+          <li><strong>Audience:</strong> Michael Abrams, the CEO, before he takes the campaign to the Board. He is not an accountant. Lead with the recommendation, keep the frameworks in service of the argument rather than on display.</li>
+          <li><strong>Components:</strong> ① advise whether the campaign should be approved; ② evaluate the <em>ethical</em>, <em>governance</em> and <em>stakeholder</em> implications; ③ give reasons for the recommendation.</li>
+          <li><strong>This task was not triggered.</strong> Nothing in the pre-release warned you it was coming. That is normal for ethics tasks and is exactly why a reliable structure matters: <em>what is the concern → what principles bear on it → what should we do</em>.</li>
+          <li><strong>The nuance to find:</strong> the email has already conceded that the claim cannot be objectively substantiated, and it sets out Exco's counter-arguments. A superficial "this is greenwashing, don't do it" misses the task. The marks are in engaging with each argument Exco actually made, and in recognising that the sustainability comparison is genuinely contestable in <em>both</em> directions.</li>
+        </ul>
+      </div>
+
+      <div class="answer">
+        <div class="hdr">
+          <div><strong>From:</strong> Newly qualified CA(SA)</div>
+          <div><strong>To:</strong> Michael Abrams, Chief Executive Officer</div>
+          <div><strong>Date:</strong> 5 August 2026</div>
+          <div><strong>Subject:</strong> RE: Proposed sustainability campaign</div>
+          <div><strong>Attached:</strong> Assessment of the proposed campaign</div>
+        </div>
+
+        <p>Dear Michael</p>
+        <p>Thank you for asking for my view before this goes to the Board.</p>
+        <p><strong>My recommendation is that the campaign should not be approved in its current form.</strong> My concern is not that the wording could be sharpened. It is that we would be publishing an absolute claim which, on Exco's own record of the discussion, we already know we cannot support with evidence. Once that is on the record, the Board is being asked to approve a statement it knows to be unsubstantiated — and that is a materially different decision from approving a bold marketing message.</p>
+        <p>I want to be equally clear that I am not recommending we say nothing. Diamante has a genuinely strong and differentiated story, and I have set out in the attachment how I think we can tell it in a way that is more persuasive than the current wording precisely because every part of it can be proved.</p>
+        <p class="sig">Kind regards<br/>Newly qualified CA(SA)</p>
+
+        <hr/>
+        <p class="kicker">Attachment — Assessment of the proposed campaign</p>
+
+        <h3>1. What exactly the concern is</h3>
+        <p>The proposed statement asks consumers to accept that Diamante's natural diamonds are "simply the most ethical and sustainable choice". That is a comparative superlative. It claims superiority not only over lab-grown diamonds but, read plainly, over every alternative — including every other natural diamond producer. Exco has recorded three things: that the statement cannot be objectively substantiated in all circumstances; that comparing the sustainability of natural and lab-grown diamonds is not straightforward because both have advantages and disadvantages; and that the prevailing view was to proceed anyway because the commercial benefit outweighs the governance and reputational risk.</p>
+        <p>That last point is the heart of it. A claim that turns out to be wrong is a mistake. A claim we publish <em>knowing</em> we cannot support it is a decision — and it is judged as one.</p>
+
+        <h3>2. Why the comparison cannot in fact be substantiated</h3>
+        <p>This is worth stating properly, because it is what makes the claim indefensible rather than merely bold:</p>
+        <ul class="clean">
+          <li><strong>Natural diamond mining creates real value</strong> — employment, skills development, local procurement, community investment, royalties and taxes in the regions where we operate. Our traceability under the Kimberley Process, our never mixing production between the two mines, our rehabilitation plans and our greenhouse gas roadmap are genuine and, as far as I can see, better than many peers.</li>
+          <li><strong>Mining also has unavoidable impacts</strong> — land disturbance, biodiversity loss, water consumption in a water-constrained country, tailings risk and Scope 1 and 2 emissions we are still working to reduce by 35–40% by 2030. We disclose these ourselves, in our own reporting.</li>
+          <li><strong>Lab-grown diamonds avoid land disturbance but are energy-intensive</strong>, so their footprint depends almost entirely on the energy source used. Some are produced on renewable power; others are not. There is no single answer.</li>
+        </ul>
+        <p>Different stakeholders legitimately weight these factors differently — a mining community and a climate-focused consumer will reach different conclusions from the same facts. That is not a gap in our evidence that better research could close. It is the nature of the question, and it is precisely why an absolute claim cannot be made.</p>
+
+        <h3>3. The ethical implications</h3>
+        <p>The dilemma is real: we have a legitimate commercial need to defend the natural diamond category while competing with lab-grown producers and while we are refinancing, and an equally legitimate obligation not to mislead the people we are selling to. What makes this resolvable rather than genuinely balanced is that there is a course of action which serves both — a narrower claim that is true — so we are not actually forced to choose between commercial success and honesty.</p>
+        <ul class="clean">
+          <li><strong>The claim is misleading by design, not by accident.</strong> Its persuasive force comes from consumers believing it is an objective finding. If it were presented as our opinion, it would not work — which tells us that the effectiveness of the campaign depends on the very impression we know is unsupported.</li>
+          <li><strong>The argument that consumers cannot evaluate complexity, so we should tell them the conclusion, is the point that concerns me most.</strong> It inverts the purpose of corporate communication. Our role is to give stakeholders reliable information so that they can decide; it is not to decide on their behalf and then supply the conclusion. It is also the sentence most likely to be quoted back at us if this is ever challenged publicly or in a regulatory process.</li>
+          <li><strong>Judged against the "good for self, good for others" test</strong>, the campaign is good for Diamante in the short term and is not good for the consumer, who pays a premium on the strength of a claim we cannot prove. That asymmetry is what marks it as an ethical problem rather than a marketing judgement.</li>
+          <li><strong>My own position as a CA(SA).</strong> Under the SAICA Code of Professional Conduct I cannot knowingly be associated with information that is materially false or misleading, or that omits or obscures information in a way that makes it misleading. That obligation applies to me as a professional accountant in business, not only to financial information. If the campaign proceeds in its current form I would need to record my advice, and I would have to consider my responsibilities in respect of non-compliance with laws and regulations if I conclude that publication would contravene consumer protection legislation.</li>
+        </ul>
+
+        <h3>4. The governance implications</h3>
+        <ul class="clean">
+          <li><strong>Ethical and effective leadership (King V).</strong> The governing body is expected to lead ethically and effectively, demonstrating integrity, competence, responsibility, accountability, fairness and transparency. Approving a claim the Board knows is unsupported is difficult to reconcile with integrity and transparency in particular, and it sets the tone for the organisation — employees take their cue on what is acceptable from what leadership approves.</li>
+          <li><strong>Responsible corporate citizenship and stakeholder inclusivity.</strong> The campaign takes public concern about conflict diamonds and environmental harm and converts it into a marketing advantage, rather than responding to it with information. A stakeholder-inclusive approach means giving stakeholders what they need to reach their own view, and balancing their legitimate interests against ours — not substituting our conclusion for theirs.</li>
+          <li><strong>Directors' duties.</strong> Under section 76(3) of the Companies Act the directors must act in good faith, for a proper purpose, in the best interests of the company, and with the degree of care, skill and diligence reasonably expected. The business judgement protection in section 76(4) is available to a director who takes reasonably diligent steps to become informed and has a rational basis for the decision. It is hard to see how it protects a decision taken in the express knowledge that the basis is absent, and section 77 can expose directors personally to loss suffered by the company as a result.</li>
+          <li><strong>The social and ethics committee.</strong> This committee's statutory mandate covers, among other things, the company's record of consumer relationships including its advertising and public relations and its compliance with consumer protection laws. A campaign of this kind falls squarely within that mandate and should be considered by that committee before it reaches the Board, not after.</li>
+          <li><strong>Consistency with our own reporting.</strong> Our integrated report acknowledges emissions, tailings, biodiversity and water risks and describes the work still to do. A marketing claim that contradicts our own disclosure is the easiest kind for a journalist, an analyst or an activist to take apart — they need only quote us against ourselves.</li>
+          <li><strong>Assurance and substantiation.</strong> Public ESG claims should be subject to the same discipline as reported information: a documented evidence base, review, and where the claim is material, independent assurance. None of that currently sits behind this statement.</li>
+        </ul>
+
+        <h3>5. The legal and regulatory exposure</h3>
+        <ul class="clean">
+          <li><strong>South Africa.</strong> The Consumer Protection Act prohibits marketing goods in a manner that is misleading, fraudulent or deceptive, and prohibits false, misleading or deceptive representations about the characteristics of goods. The Advertising Regulatory Board's code requires that claims — and environmental claims especially — be capable of substantiation, and our competitors have standing to complain. We are expressly comparing ourselves to lab-grown producers, which invites exactly that.</li>
+          <li><strong>The United States is 52% of our revenue.</strong> The FTC's Green Guides specifically caution against unqualified general environmental benefit claims such as "sustainable", on the basis that they convey more than can be substantiated. This is not a theoretical exposure in a distant market — it is our largest one.</li>
+          <li><strong>Other markets.</strong> India is 11% and growing at 12% a year, and European markets are tightening rules on environmental claims. A single campaign run globally has to satisfy the strictest regime it reaches.</li>
+        </ul>
+
+        <h3>6. The commercial argument, on its own terms</h3>
+        <p>Exco's view is that the commercial benefits outweigh the governance and reputational risks. I would respectfully suggest that the weighing has not been done fully:</p>
+        <ul class="clean">
+          <li><strong>The timing is the worst possible.</strong> Our refinancing depends on a bank commitment that is conditional on a successful rights issue and on Shareholders A and B agreeing revised terms. A greenwashing controversy during that window would not damage the brand in the abstract — it would put the refinancing, and therefore our going concern status, at risk. That is a far larger exposure than any uplift the campaign could deliver.</li>
+          <li><strong>The claim is fragile in a way a truthful one is not.</strong> A campaign that can be dismantled by one well-researched article converts a marketing spend into a reputational liability, and the correction is always more widely reported than the original claim.</li>
+          <li><strong>It undermines the asset we are trying to build.</strong> The premium we are seeking rests on trust. Spending that trust to assert superiority we cannot demonstrate is, commercially, the wrong trade.</li>
+        </ul>
+        <p>On the specific points raised in Exco: it is true that consumers want simple, compelling messages — but simplicity is achieved by making a <em>narrower</em> claim that is true, not a broader one that is not. It is also true that our practices distinguish us from many competitors — but that justifies claims about <em>us</em>, not a comparative superlative about an entire product category.</p>
+
+        <h3>7. Stakeholder implications</h3>
+        <table>
+          <thead><tr><th style="width:24%">Stakeholder</th><th>Implication</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Consumers</strong></td><td>These are the people the claim is aimed at, and traceability and ethical sourcing are exactly what they are increasingly asking about. They may pay a premium in reliance on it. If it is challenged, the loss of trust falls hardest on the group whose trust we most need, and in the same market where we are asking them to choose natural over lab-grown.</td></tr>
+            <tr><td><strong>Our actual customers — registered tender buyers and jewellery houses</strong></td><td>We do not sell to consumers directly; we sell parcels to registered buyers who then face the consumer. They carry their own ESG commitments and reputational exposure, and some premium producers have publicly committed to natural stones. An unsupported claim passed down the chain becomes their problem, and could cost us buyers at a time when we need a deep bidder pool to hold reserve prices.</td></tr>
+            <tr><td><strong>Shareholders and lenders</strong></td><td>Directly relevant to the rights issue and the bank commitment. If the market sees us making claims we cannot support in one area, it will discount what we say in others — including our going concern disclosures and our cash flow forecasts.</td></tr>
+            <tr><td><strong>Employees</strong></td><td>They take the ethical temperature of the organisation from what leadership approves. Approving a claim known to be unsupported, in a year in which bonuses have been paused and Mine 2 may close, signals that commercial expediency outranks integrity. That is a difficult culture to reverse.</td></tr>
+            <tr><td><strong>Mining communities</strong></td><td>A campaign that presents mining as unambiguously the most sustainable choice, while those communities live with the dust, water use and land impact, risks being read locally as overstatement. Our social licence to operate depends on those relationships.</td></tr>
+            <tr><td><strong>Regulators, competitors, NGOs and media</strong></td><td>Lab-grown producers have both the incentive and the standing to complain to the ARB or the National Consumer Commission. NGOs actively test diamond industry sustainability claims. A regulatory finding against us would be reported far more widely than the campaign itself.</td></tr>
+            <tr><td><strong>The Board and management</strong></td><td>Personal exposure under section 76 and 77, and, for me, obligations under the SAICA Code.</td></tr>
+          </tbody>
+        </table>
+
+        <h3>8. Recommended way forward</h3>
+        <ol>
+          <li><strong>Do not approve the campaign in its current form.</strong></li>
+          <li><strong>Replace the superlative with specific claims we can prove</strong>, which I think will be more persuasive, not less: every Diamante diamond is traceable to one of our two South African mines and is never mixed between them; we operate under the Kimberley Process protocols; we have committed to a 35–40% reduction in Scope 1 and 2 emissions by 2030; and our rehabilitation and community investment programmes deliver measurable outcomes we can publish. "Here is exactly where your diamond came from" is a stronger message than "ours are the most ethical", and no competitor can copy it without doing the work.</li>
+          <li><strong>Build a substantiation file before publication</strong> — for every claim, the evidence supporting it and the assurance behind it, retained for the life of the campaign and refreshed as the underlying data changes.</li>
+          <li><strong>Route the campaign through the social and ethics committee</strong>, and obtain legal and ARB review, with a separate review against the FTC Green Guides for the US market and equivalent rules for Europe.</li>
+          <li><strong>Align it with the integrated report</strong> and consider independent assurance over the key metrics. Assured claims are the ones that survive scrutiny, and in a market full of unverified assertions, assurance is itself the differentiator.</li>
+          <li><strong>Where we do want to address lab-grown diamonds, do it factually</strong> — that their footprint depends on the energy source used, and that natural diamond mining supports employment, skills and community investment that lab production does not. Presented honestly, that comparison still favours us in the respects that matter to our customers.</li>
+          <li><strong>If the Board decides to proceed regardless</strong>, I would ask that my advice, and Exco's acknowledgement that the claim extends beyond what the evidence supports, be recorded in the minutes.</li>
+        </ol>
+      </div>
+    </section>
+    <!-- ===================== TASK F ===================== -->
+    <section id="task-f" class="card">
+      <h2><span class="pill task">Task (f)</span> Tax risks arising from the proposed changes to the shareholder loans</h2>
+
+      <div class="approach">
+        <h5>Reading the task</h5>
+        <ul>
+          <li><strong>Audience:</strong> Monique Sithole, Head of Finance, considering the proposals before terms are agreed.</li>
+          <li><strong>Components — three, for <em>each</em> proposal:</strong> ① what risks of unfavourable tax consequences arise <em>for Diamante</em>; ② what the consequences would be if the risks materialised; ③ what more you would need to know to conclude whether the risk occurs and to quantify the rand impact.</li>
+          <li><strong>Scope:</strong> Diamante's perspective only. The shareholders are taking their own advice, and both have confirmed they are satisfied that neither proposal is an actual or deemed donation — so donations tax is scoped out and should not be discussed.</li>
+          <li><strong>The trap that decided this task:</strong> sensing that "something tax-related is happening" and reaching for the nearest provision. Shareholder A is a section 19 debt benefit question, made harder because A is an <em>existing shareholder</em>. Shareholder B, whose deferral is conditional on the market value of assets exceeding liabilities, is specifically a <strong>section 8F hybrid debt instrument</strong> question — not section 24J deductibility, not section 23M, not transfer pricing.</li>
+          <li><strong>Information requests must be specific.</strong> "Details of the loan" earns nothing. Name the figure you need and say what you would do with it.</li>
+        </ul>
+      </div>
+
+      <div class="answer">
+        <div class="hdr">
+          <div><strong>From:</strong> Newly qualified CA(SA)</div>
+          <div><strong>To:</strong> Monique Sithole, Head of Finance</div>
+          <div><strong>Date:</strong> 5 August 2026</div>
+          <div><strong>Subject:</strong> RE: Shareholder loans — tax risks for Diamante</div>
+        </div>
+
+        <p>Dear Monique</p>
+        <p>Thank you for flagging this before terms are agreed — that is the right time to look at it, because in both cases the tax outcome turns on how the clauses are drafted rather than on what the parties intend. I have considered each proposal from Diamante's perspective only, and have taken it as given that neither constitutes an actual or deemed donation.</p>
+        <p>In short: each proposal creates one principal risk. Shareholder A's conversion may give rise to a <strong>debt benefit under section 19 and paragraph 12A of the Eighth Schedule</strong>. Shareholder B's conditional deferral would, if triggered, make the loan a <strong>hybrid debt instrument under section 8F</strong>, which is the more expensive of the two because it costs us a deduction and attracts dividends tax. Both have available relief, but the relief has to be built into the process now rather than sought afterwards.</p>
+
+        <h3 id="f-a">Shareholder A — conversion of the loan into Diamante shares</h3>
+
+        <h4>Risk 1: a debt benefit arises on the conversion</h4>
+        <p><strong>The risk.</strong> Settling a debt by issuing shares is a concession or compromise in respect of that debt, and brings us within section 19 and paragraph 12A. A "debt benefit" arises to the extent that the amount of the debt settled exceeds the value of what we give up in exchange for it.</p>
+        <p><strong>The measurement point that matters here.</strong> The usual comparison is the amount of the debt against the market value of the shares issued. That is not the right comparison in our case, because <strong>Shareholder A already holds 36% of Diamante</strong>. Issuing new shares to an existing shareholder also changes the value of the shares that shareholder already owns. The debt benefit must therefore be measured against the <em>increase in the market value of Shareholder A's entire shareholding</em> — existing shares plus new shares — immediately after the conversion compared with immediately before. The practical consequence is important and easy to miss: <strong>if the amount of the loan settled equals that increase in value, there is no debt benefit at all, and no tax consequence.</strong> That is an outcome we can work towards in agreeing the number of shares, and it is a reason to price the conversion properly rather than leave it to be settled commercially.</p>
+        <p><strong>The consequence if a debt benefit does arise.</strong> It depends on what the borrowed money was used for:</p>
+        <ul class="clean">
+          <li>To the extent the loan funded expenditure we previously <em>deducted</em> — most obviously interest deducted under section 24J but never actually paid and rolled into the loan balance — that deduction is reversed and added back in determining our taxable income.</li>
+          <li>To the extent it funded assets on which we claimed capital allowances, the allowances or tax values are reduced, which increases taxable income in future years.</li>
+          <li>To the extent it funded capital assets still held, paragraph 12A reduces their base cost; if those assets have already been disposed of, a capital gain can arise.</li>
+        </ul>
+        <p>The cash effect would not necessarily be immediate given our loss position, but it would erode the assessed loss we are carrying — and we do have income tax payable of R72 million on the balance sheet, so it is not a purely theoretical cost.</p>
+        <p><strong>The relief does not help us.</strong> The group-companies exclusion in section 19(8) requires, depending on which limb applies, that the companies were group companies in the previous year of assessment as well as the current one and that the debtor company is not carrying on any trade, or that the companies were a group when the debt was incurred and when it was reduced. Neither is the case for Diamante and Shareholder A — A holds 36%, we trade, and A was not a group company when the loan was advanced. We should not plan on the exclusion applying, and I would caution against the intuition that a larger post-conversion shareholding somehow brings us within it.</p>
+
+        <h4>Risk 2: a value mismatch on the share issue (section 24BA)</h4>
+        <p><strong>The risk.</strong> Where a company issues shares in exchange for an asset — here, the claim against ourselves — and the value of the shares issued does not match the market value of the asset acquired, section 24BA can apply. This is a live risk precisely because the number of shares is expressly "to be agreed by both parties" rather than derived from a valuation.</p>
+        <p><strong>The consequence.</strong> If the shares issued are worth more than the debt extinguished, the excess can be deemed a dividend in specie, on which we would be liable for dividends tax at 20%. If they are worth less, a capital gain can arise. Either way the consequence falls on Diamante.</p>
+        <p><strong>Mitigation.</strong> Support the number of shares with an independent valuation contemporaneous with the agreement, and confirm with our advisers whether any of the exclusions apply.</p>
+
+        <h4>Risk 3: secondary and lower — assessed loss and approvals</h4>
+        <p>Because the conversion will materially increase Shareholder A's holding at a time when we are carrying substantial assessed losses, SARS could in principle query the arrangement under the general anti-avoidance provision dealing with changes in shareholding entered into mainly to utilise an assessed loss. I regard this risk as low — the commercial purpose is plainly the refinancing, not loss utilisation — but we should make sure the board minutes and the negotiation record evidence that purpose contemporaneously. Separately, and outside the tax question: an issue of shares carrying voting power in excess of 30% of the voting power already in issue requires a special resolution under section 41(3) of the Companies Act, and as a material shareholder, A is a related party for JSE purposes. Worth confirming with the company secretary early, because it affects the timetable.</p>
+
+        <h4>What I need in order to conclude and quantify — Shareholder A</h4>
+        <ol>
+          <li>The <strong>number of Diamante shares Shareholder A currently holds</strong> and the market value per share immediately before the conversion.</li>
+          <li>The <strong>agreed number of shares to be issued</strong>, and the expected market value per share immediately after. With items 1 and 2 I can calculate the increase in the value of A's total shareholding, which is the figure the debt benefit is measured against.</li>
+          <li>The <strong>composition of the loan balance</strong>: capital advanced, accrued interest, and specifically <strong>how much interest we have deducted under section 24J but not yet paid</strong>. This is the amount that would be added back if a debt benefit arises, and it is the number that determines the rand impact.</li>
+          <li><strong>What the loan funded</strong> — operating expenditure, mining capital expenditure on which we claimed mining capital allowances, or other capital assets — together with the tax values of those assets. This determines which of the three consequences above applies.</li>
+          <li>Whether <strong>Shareholder A is a company</strong>, whether it is a South African resident, and its shareholding history with us, to confirm the group exclusion position.</li>
+          <li>The <strong>independent valuation</strong> supporting the conversion ratio, for section 24BA.</li>
+        </ol>
+
+        <h3 id="f-b">Shareholder B — deferral conditional on liabilities exceeding assets</h3>
+
+        <h4>The risk: the loan becomes a hybrid debt instrument (section 8F)</h4>
+        <p><strong>The risk.</strong> Section 8F treats an instrument as a hybrid debt instrument where, among other circumstances, the company's obligation to pay interest or capital is <em>conditional on the market value of its assets not being less than the market value of its liabilities</em>. That is precisely the condition Shareholder B proposes. The instrument's tax character changes even though nothing about the commercial substance of the loan has changed.</p>
+        <p><strong>The consequence if payments are in fact deferred on that basis.</strong> Two things happen together:</p>
+        <ul class="clean">
+          <li>The interest incurred during the deferral period is <strong>not deductible</strong> in determining our taxable income; and</li>
+          <li>that same interest is <strong>deemed to be a dividend in specie</strong> declared and paid by Diamante on the last day of the year of assessment in which the instrument is a hybrid debt instrument, on which <strong>Diamante is liable for dividends tax at 20%</strong>.</li>
+        </ul>
+        <p>This is the more damaging of the two proposals: we would lose a deduction <em>and</em> pay cash tax, at the exact point in the cycle when the deferral clause is triggered — that is, when we are in the worst financial position. It is the definition of an unintended adverse consequence, and it is worth putting to Shareholder A, who raised the concern in the first place.</p>
+
+        <h4>Two reliefs, both of which we should secure in advance</h4>
+        <ul class="clean">
+          <li><strong>The registered auditor's certificate.</strong> The deeming provision does not apply where a registered auditor certifies that the payment has been, or is to be, deferred by reason of the market value of the company's assets being less than its liabilities. Given that this is exactly the circumstance in which the clause would ever operate, the certificate should in principle be obtainable — but it depends on KZL being willing and able to give it, and on the evidence they would need. I would raise this with Taariq Moosa <em>before</em> we sign, not afterwards.</li>
+          <li><strong>The dividends tax exemption.</strong> If a deemed dividend in specie does arise, it may be exempt under section 64FA — most obviously where the beneficial owner is a South African resident company and the required declaration and written undertaking are given to us before payment. That depends on who Shareholder B actually is, and it requires a process to collect the declaration, which we should set up now.</li>
+        </ul>
+
+        <h4>Timing and drafting</h4>
+        <p>Two points on this. First, the risk only crystallises if the condition is actually met — that is, if the market value of our liabilities exceeds that of our assets. At 30 June 2026 our equity is still positive at R891 million, so on the face of it we are not there. But the terms as drafted create the exposure in <em>every</em> future year, and the tax consequence attaches in the year the instrument becomes a hybrid, not when the deferred money is eventually paid. Second, and more usefully: the commercial outcome Shareholder B is offering — not being repaid while we are under pressure — can probably be achieved without a solvency-linked condition. A fixed extended maturity date, or a standstill with a deferral exercisable at the lender's election, may deliver the same protection without engaging section 8F at all. I would ask our tax advisers to test alternative wording before the terms are settled, because the drafting is doing all the work here.</p>
+        <p>For completeness, I considered and ruled out several provisions that look close at hand but are not triggered on these facts: ordinary section 24J deductibility is not the issue (the deduction is denied by section 8F, not by section 24J); the interest limitation in section 23M and transfer pricing under section 31 are not engaged by a deferral of repayment as such; and withholding tax on interest would only arise if Shareholder B is a non-resident, which we have not yet established. I mention these only so that you know they have been looked at.</p>
+
+        <h4>What I need in order to conclude and quantify — Shareholder B</h4>
+        <ol>
+          <li>The <strong>identity and tax residence of Shareholder B</strong>, and whether it is a company — this determines whether the section 64FA exemption is available and whether withholding tax on interest would ever be in point.</li>
+          <li>The <strong>interest rate on the loan and the amount of interest that would accrue</strong> from the date the amended terms take effect to the last day of that year of assessment. This is the precise amount that would be disallowed as a deduction <em>and</em> deemed to be a dividend, so it gives us both rand figures directly.</li>
+          <li><strong>Written confirmation from KZL</strong> that they would be prepared to issue the registered auditor's certificate, and what evidence they would require to do so.</li>
+          <li>The <strong>final drafted wording of the deferral clause</strong>. The whole outcome turns on the precise formulation of the condition, so the analysis cannot be finalised on a description of intent.</li>
+          <li>Our <strong>forecast market value of assets against liabilities</strong> over the refinancing period, so we can assess how likely the trigger actually is and size the exposure.</li>
+        </ol>
+
+        <h3>Both proposals</h3>
+        <p>Neither has VAT consequences: the loans and the shares are financial services and the supplies are exempt. No securities transfer tax arises on the <em>issue</em> of shares, as STT applies to transfers. I would recommend that the final drafts of both agreements are reviewed by our tax advisers before signature, and that if the amounts involved are material we consider an advance tax ruling on the section 8F wording — the cost of a ruling is small relative to losing a deduction and paying dividends tax on the same amount.</p>
+        <p>Once I have the information above I can quantify both exposures. Please let me know if it would help for me to put the requests directly to the shareholders' advisers.</p>
+        <p class="sig">Kind regards<br/>Newly qualified CA(SA)</p>
+      </div>
+    </section>
+    <!-- ===================== TASK G ===================== -->
+    <section id="task-g" class="card">
+      <h2><span class="pill task">Task (g)</span> Diamond bagging and transportation — control weaknesses and improvements</h2>
+
+      <div class="approach">
+        <h5>Reading the task</h5>
+        <ul>
+          <li><strong>Audience:</strong> Monique Sithole, who will review the write-up before the meeting with Internal Audit.</li>
+          <li><strong>Components:</strong> ① identify the weaknesses; ② recommend improvements to strengthen the process and related controls.</li>
+          <li><strong>Scope:</strong> extraction and bagging at the mine site, and transit to the central facility. The shared facility is explicitly the next phase, and the Kimberley Process review was done last year and was satisfactory — this review is about <em>internal operational objectives</em>. Management has stated an objective of <strong>new technology and ERP integration</strong>, so recommendations that do not use it are only half an answer.</li>
+          <li><strong>What separates competent from borderline:</strong> a weakness is not a restatement of the process. It is the root cause plus what could go wrong as a result. And a recommendation must be actionable — "use CCTV" is not a control; "CCTV covering the scale and sealing station with a clear view of hands and bags, retained for 90 days and reviewed weekly against the ERP exception report" is.</li>
+        </ul>
+      </div>
+
+      <div class="answer">
+        <div class="hdr">
+          <div><strong>From:</strong> Newly qualified CA(SA)</div>
+          <div><strong>To:</strong> Monique Sithole, Head of Finance</div>
+          <div><strong>Cc:</strong> Jackie Brits, Chief Financial Officer</div>
+          <div><strong>Date:</strong> 5 August 2026</div>
+          <div><strong>Subject:</strong> RE: Diamond bagging and transportation controls</div>
+          <div><strong>Attached:</strong> Weaknesses and recommended improvements</div>
+        </div>
+        <p>Dear Monique</p>
+        <p>My review of the process flow is attached. I have set out fifteen weaknesses across the two stages, with what could go wrong in each case and a specific improvement, and I have leaned deliberately towards recommendations that use technology and integrate with the ERP, since the board has identified that as an objective.</p>
+        <p>Three themes run through the whole process and may be the more useful way to frame the discussion with Internal Audit:</p>
+        <ul class="clean">
+          <li><strong>Everything depends on one person's manual record.</strong> The weight recorded by the shift supervisor is the only evidence of what was recovered, it is written by hand, captured by the same person at the end of the day, and never independently verified. Until that changes, every downstream control is reconciling to a number nobody has checked.</li>
+          <li><strong>The controls are almost entirely preventative in intent and detective in nothing.</strong> There is no reconciliation, no exception report and no expectation against which actual recovery is compared, so an error or a theft would have to be stumbled upon rather than detected.</li>
+          <li><strong>The transit arrangements are predictable, and the monitoring looks the wrong way.</strong> A fixed twice-weekly route with an outward-facing dashcam records the road while the cargo is unobserved.</li>
+        </ul>
+        <p>One point sits at the boundary of the scope you set. Internal Audit found our Kimberley Process adherence satisfactory, so I have focused on operational objectives — but weakness 9, on the combined transit of both mines' production, is also the point at which our assurance to customers that we never mix production from the two mines is most exposed. I would not drop it on the basis that Kimberley Process compliance was signed off last year.</p>
+        <p class="sig">Kind regards<br/>Newly qualified CA(SA)</p>
+
+        <hr/>
+        <p class="kicker">Attachment — Weaknesses and recommended improvements</p>
+
+        <h3>Stage 1 — Extraction and bagging at the mine site</h3>
+        <table>
+          <thead><tr><th style="width:5%">#</th><th style="width:45%">Weakness and why it matters</th><th style="width:50%">Recommended improvement</th></tr></thead>
+          <tbody>
+            <tr><td>1</td>
+              <td><strong>Bag numbers and weights are recorded by hand on a physical log sheet and only captured into the system at the end of the day.</strong> The recorded weight is the first and only record of what was recovered, and everything downstream reconciles to it. A misread scale, a transposed figure or a deliberate understatement is undetectable, and the gap between writing the sheet and capturing it leaves a window in which it can be altered before anyone else sees it.</td>
+              <td>Capture at source: interface the electronic scales directly with the ERP so that each weighing writes the weight, bag number, date, time and operator ID automatically, with no re-keying. Where a manual override is unavoidable, require a reason code and a second authorisation, and generate a daily exception report of all overrides for the mine manager to review and sign off electronically.</td></tr>
+            <tr><td>2</td>
+              <td><strong>The shift supervisor weighs, records and captures, with no independent verification.</strong> One person has both custody of the diamonds and control of the record of them. That is the classic absence of segregation of duties, and it means misappropriation would not merely be possible but would leave no trace in the records.</td>
+              <td>Require two authorised people at the weighing and sealing station: one operates the scale, the second independently verifies the weight and bag number and countersigns electronically in the ERP. Configure system rights so the person who captures a weighing cannot approve it, and so a bag cannot be released without both authorisations.</td></tr>
+            <tr><td>3</td>
+              <td><strong>Handwritten sheets can be altered after the event with no evidence of the change.</strong> An alteration is the simplest way to conceal a theft or the substitution of a high-value stone with an inferior one, and there is currently no audit trail against which an alteration could be identified.</td>
+              <td>Once capture at source is implemented (weakness 1), lock records on creation so that every subsequent change is a system-generated amendment carrying the user, timestamp, original value and reason. Review the change log weekly, independently of the mine site, and investigate every amendment.</td></tr>
+            <tr><td>4</td>
+              <td><strong>Bags are sealed with standard plastic zip ties.</strong> These are freely available commercially and can be cut and replaced with identical ties, so a bag can be opened in transit, its contents changed, and resealed with nothing visible on arrival. The seal therefore provides no assurance at all.</td>
+              <td>Replace with numbered, tamper-evident high-security seals or RFID locking seals drawn from a controlled, pre-numbered stock held under dual custody. Record the seal number in the ERP against the bag at the point of sealing, and require the seal number to be scanned and matched at the receiving facility. Reconcile seals issued, used, voided and on hand monthly, and investigate every difference.</td></tr>
+            <tr><td>5</td>
+              <td><strong>Bag identity depends on a stick-on sticker.</strong> Stickers peel, degrade in a harsh mining environment or can simply be swapped between bags. If a bag loses or changes its identity, the ERP record attaches to the wrong physical bag, and both the traceability of the parcel to its mine and the completeness of the shipment break down.</td>
+              <td>Use durable identification integrated into the bag itself — a laser-etched or woven barcode or an RFID tag embedded in the canvas — scanned at every handover point. Retain the printed number as a secondary human-readable reference only, and reject any bag at receipt whose embedded identifier cannot be read.</td></tr>
+            <tr><td>6</td>
+              <td><strong>Bag numbers are pre-printed sequentially, but nothing checks the sequence.</strong> A gap in the sequence is the single most direct evidence that a bag has gone missing or that one has been created outside the system, and at present nobody is looking for one.</td>
+              <td>Have the ERP run an automated sequence check at the end of every shift, reporting gaps, duplicates and unused pre-printed numbers. Require the shift supervisor's manager to clear every exception, with a documented explanation, before the shipment is released for collection.</td></tr>
+            <tr><td>7</td>
+              <td><strong>There is no expectation against which actual recovery is assessed.</strong> Even a perfect record of what was bagged tells us nothing about what <em>should</em> have been bagged. Diamonds removed before the weighing point would never enter the system, and no control in the current process would reveal it.</td>
+              <td>Introduce a recovery reconciliation: expected carats per tonne milled, by mine and by mining block, derived from the geological model, compared against actual recovered carats, with variances beyond an agreed tolerance investigated and reported to the mine manager and Internal Audit. This has a second benefit — it gives the board a direct operational measure of the value-led production strategy, and it is the kind of measure that could support a remuneration KPI.</td></tr>
+            <tr><td>8</td>
+              <td><strong>Physical access to the weighing and sealing area, and the vetting of the people who work in it, are not addressed.</strong> The bagging point is where the product is most concentrated, most portable and least traceable. Without access control and personnel screening, the entire control environment at the highest-risk point rests on trust.</td>
+              <td>Restrict the bagging area to authorised, security-vetted personnel using badge access that is logged and reviewed. Install CCTV covering the scale and the sealing station with a clear view of hands and bags, retained for an agreed minimum period, and reviewed on a routine sample basis — not only when something is suspected — and automatically whenever an ERP exception is raised. Vet and periodically re-vet supervisors, and enforce rotation and compulsory leave so that no individual permanently controls a single shift.</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Stage 2 — Transit to the central cutting and polishing facility</h3>
+        <table>
+          <thead><tr><th style="width:5%">#</th><th style="width:45%">Weakness and why it matters</th><th style="width:50%">Recommended improvement</th></tr></thead>
+          <tbody>
+            <tr><td>9</td>
+              <td><strong>Production from both mines travels in the same vehicle at the same time.</strong> Our assurance to customers — and part of the value of our parcels — rests on production from the two mines never being mixed. A torn bag, a failed seal or a reopened bag during a combined run results in commingling that cannot be reversed, because once mixed the stones cannot be reallocated to a mine. The risk is to a commercial claim we make publicly, not merely to inventory accuracy.</td>
+              <td>Run dedicated single-mine routes on separate days. Where a combined route is operationally unavoidable, require each mine's bags to be loaded into separate locked, sealed cages within the vehicle, with cage seal numbers recorded on dispatch and verified on receipt, and prohibit the second mine's cage from being opened at any point on the route.</td></tr>
+            <tr><td>10</td>
+              <td><strong>Collections run twice a week, on a single fixed route, in a fixed sequence.</strong> Predictability is what makes an armed robbery plannable. Anyone observing the operation for a few weeks knows when the vehicle runs and when it is carrying the most value.</td>
+              <td>Randomise collection days and times within the week and vary both the route and the order in which the mines are visited. Restrict knowledge of the schedule to a small, named group and release it to the transport provider only shortly before dispatch.</td></tr>
+            <tr><td>11</td>
+              <td><strong>The route concentrates the maximum value in one vehicle.</strong> Because the vehicle loads at the first mine and then at the second, it carries the entire combined consignment for the final leg. A single incident therefore exposes both mines' production for that half of the week.</td>
+              <td>Stagger shipments so that no single trip carries more than an agreed maximum value, with the threshold set by reference to our insurance cover and reviewed as production and diamond prices change. Confirm that the cover in place matches the values actually carried.</td></tr>
+            <tr><td>12</td>
+              <td><strong>There is no handover control at loading or at delivery.</strong> Nobody counts the bags, verifies the seals or signs for them when custody changes. If a bag is missing at the facility, there is no evidence of whether it left the mine, so responsibility cannot be established and the investigation starts from nothing.</td>
+              <td>At loading, require the driver to scan each bag and its seal, confirm the count against the ERP dispatch list and sign electronically to accept custody. Repeat the process at delivery, with the receiving facility scanning against the same list. Have the ERP automatically flag any difference between bags dispatched and bags received, and require the difference to be investigated and cleared before the shipment is broken down for processing.</td></tr>
+            <tr><td>13</td>
+              <td><strong>The only camera faces outward at the front of the vehicle, and footage is provided to management "upon request".</strong> The camera records the road, not the cargo — it would not capture a bag being swapped, removed, or an unverified stone being introduced between the two mine stops. And a control that operates only on request detects nothing: management must already suspect a problem before it produces any information.</td>
+              <td>Add cameras covering the cargo area and the loading doors, streamed live or continuously uploaded off the vehicle rather than stored on it, so footage cannot be lost with the vehicle. Set a defined retention period, review footage on a routine sample basis, and trigger automatic review whenever an exception is raised — a seal mismatch, an unscheduled stop or a door opening outside an authorised location.</td></tr>
+            <tr><td>14</td>
+              <td><strong>Nothing monitors the vehicle's movement or the cargo doors.</strong> An unscheduled stop and an unauthorised door opening are the two events most likely to accompany a loss, and neither is currently detected — or even recorded.</td>
+              <td>Fit GPS tracking with geofencing, and electronic cargo-door locks that can only be released at the two mines and the central facility. Route real-time alerts for route deviations, unscheduled stops and out-of-geofence door openings to a control room that is required to respond, log the outcome and escalate unresolved alerts to Diamante.</td></tr>
+            <tr><td>15</td>
+              <td><strong>Custody of our highest-value asset has been outsourced with no stated contractual control or assurance framework.</strong> The only control mentioned is a panic button. We have no visibility of the provider's own vetting, crewing or incident procedures, and no basis for relying on them.</td>
+              <td>Formalise the arrangement in the contract: minimum control requirements (crew vetting, a two-crew rule, no unscheduled stops, defined incident reporting timelines), a right to audit, evidence of insurance cover adequate for the values carried, and an annual independent assurance report over the provider's controls. Include Diamante's right to inspect the vehicle before loading, and agree the liability position for losses in transit.</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout info"><strong>Two points for the meeting with Internal Audit.</strong> First, several of these controls only close if the <em>receiving</em> end performs its half — the seal match, the bag count and the sequence reconciliation all depend on the central facility. I would suggest the phase 2 review is scoped to pick those up explicitly so that we do not end up with a dispatch control and no receipt control. Second, on sequencing: weaknesses 1, 2 and 4 are the ones I would implement first. Capture at source, a second pair of eyes at the scale, and a seal that actually shows tampering give the largest reduction in risk for the least disruption, and several of the other recommendations depend on them being in place.</div>
+      </div>
+    </section>
+    <!-- ===================== TASK H ===================== -->
+    <section id="task-h" class="card">
+      <h2><span class="pill task">Task (h)</span> Critical review of the AuditAI working papers</h2>
+
+      <div class="approach">
+        <h5>Reading the task</h5>
+        <ul>
+          <li><strong>Change of role.</strong> You are now David Khumalo, a newly qualified CA(SA) at KZL Inc. You are the <em>auditor</em>, not the client. Diamante is "the Company", not "we", and every sentence must be written from the audit side.</li>
+          <li><strong>Audience:</strong> Taariq Moosa, the audit manager.</li>
+          <li><strong>Components:</strong> ① critically evaluate the two draft working papers; ② complete the Working Paper Review Template in the format given.</li>
+          <li><strong>Explicit scope limit:</strong> "You are not required to provide additional audit procedures; only to correct what has been provided." Proposing replacement procedures is not extra credit — it is not answering the task. Where a procedure is correct, the template says to write "Correct", so say so: <strong>A1 and B1 are correct</strong>, and failing to say so reads as though you did not know.</li>
+          <li><strong>The conceptual trap:</strong> a <em>material uncertainty</em> about going concern is not the same as concluding the entity <em>cannot</em> continue as a going concern. And an <em>inadequate disclosure</em> of that uncertainty is not the same as an <em>inappropriate basis of preparation</em>. The first pair of distinctions decides the E9 review; the second decides F4.</li>
+        </ul>
+      </div>
+
+      <div class="answer">
+        <div class="hdr">
+          <div><strong>From:</strong> David Khumalo, Assistant audit manager</div>
+          <div><strong>To:</strong> Taariq Moosa, Audit manager</div>
+          <div><strong>Date:</strong> 5 August 2026</div>
+          <div><strong>Subject:</strong> RE: Going concern — review of AuditAI working papers E9 and F4</div>
+          <div><strong>Attached:</strong> Working Paper Review Template (completed)</div>
+        </div>
+
+        <p>Dear Taariq</p>
+        <p>I have completed the review template, which is attached. In summary, of the ten procedures in E9, <strong>two are appropriate as drafted (A1 and B1)</strong> and eight require correction, and I have identified <strong>seven errors</strong> in the draft Basis for Qualified Opinion in F4.</p>
+        <p>Rather than repeat the template, it may help if I set out the three recurring problems, because they point to how the tool is reasoning rather than to ten isolated slips:</p>
+        <ol>
+          <li><strong>It confuses management's responsibility with ours.</strong> Procedures A4 and B4 both have us performing the liquidity, solvency and cash flow assessment. Management performs the going concern assessment; our responsibility under ISA 570 is to evaluate it. Performing it ourselves would assume management's role and create a self-review threat.</li>
+          <li><strong>It treats arrangements that are still under negotiation as if they were already effective at the reporting date.</strong> Procedures A5 and A6 expect the loan to be nil and share capital to be increased at 30 June 2026. The conversion had not been agreed at year-end and will occur afterwards — it is a non-adjusting event, and the year-end balances are unaffected. Following these procedures would have us challenging correctly stated balances.</li>
+          <li><strong>It relies on internally generated evidence and on enquiry alone.</strong> Procedures B2 and B3 corroborate management's forward-looking assumptions with management's own documents, and assess Shareholder B's capacity by asking Shareholder B.</li>
+        </ol>
+        <p>Two further points that sit outside the template but that I think we should deal with before the file is finalised:</p>
+        <ul class="clean">
+          <li><strong>Neither working paper addresses the inter-conditionality that is the heart of the going concern question.</strong> The bank's commitment to extend maturity to 2030 is conditional on a successful rights issue <em>and</em> on both shareholders agreeing revised terms; the shareholders' revised terms and the rights issue both require shareholder approval at a meeting not yet held; and the shareholders have so far only indicated willingness in principle. The arrangements therefore have to be evaluated as a chain, not individually, and we need to assess whether any of them yet constitutes a firm, enforceable commitment. E9 tests each link as if it stood alone.</li>
+          <li><strong>The working paper records "Prepared by AuditAI" with no preparer and no reviewer.</strong> Under ISA 220 and ISQM 1 responsibility for the work remains with the engagement team; AI output is an input to be evaluated, not audit evidence. The file should record the team member who prepared or took responsibility for the paper and the reviewer, and I would suggest we agree a firm-wide approach to the nature and extent of review of AI-generated content before AuditAI is used more widely. A smaller point in the same direction: the header describes the client as "Diamante (Pty)", and the same error carries into the draft opinion paragraph. Diamante is a JSE-listed public company. It is minor in itself, but it suggests the output was not grounded in the client's actual circumstances.</li>
+        </ul>
+        <p>Happy to talk through any of this, and to draft a corrected Basis for Qualified Opinion once we have concluded on the adequacy of management's disclosure.</p>
+        <p class="sig">Kind regards<br/>David Khumalo</p>
+
+        <hr/>
+        <p class="kicker" id="h-e9">Working Paper Review Template (completed) — Working Paper E9</p>
+        <p class="note">Instructions followed: for each procedure, the reason it is incorrect; where the procedure is correct, "Correct". No additional or substitute procedures proposed.</p>
+        <table>
+          <thead><tr><th style="width:10%">Procedure</th><th>Explanation</th></tr></thead>
+          <tbody>
+            <tr><td class="agree"><strong>A1</strong></td><td><strong>Correct.</strong> Inspecting the settlement agreement for its terms and for the signatures of authorised representatives of both parties is an appropriate procedure to establish whether the conversion has been formally agreed and is legally enforceable, which is the starting point for assessing whether it can be taken into account in the going concern assessment at all.</td></tr>
+            <tr><td class="disagree"><strong>A2</strong></td><td>Incorrect, for two reasons. First, the memorandum of incorporation records the number of shares the Company is <em>authorised</em> to issue, not the number in issue; the number in issue is evidenced by the securities register maintained under section 50 of the Companies Act. Second, the comparison is stated the wrong way round: the point of the procedure should be to establish that the shares to be issued, together with those already in issue, do not <em>exceed</em> the authorised share capital — and if they do, that the MOI has been amended accordingly. As drafted the procedure would obtain the wrong document and draw the wrong conclusion from it.</td></tr>
+            <tr><td class="disagree"><strong>A3</strong></td><td>Incorrect as drafted. The issue of shares is authorised by the <em>board of directors</em> under sections 38 and 40 of the Companies Act, so the evidence sought should be the board minutes and the board resolution, not the minutes of a general meeting and a special resolution. The procedure identifies the wrong authorising body and would not obtain evidence of the board's authorisation at all. For completeness — this does not make the procedure correct, but it should inform the replacement — shareholder approval may additionally be required: by special resolution under section 41(3) if the shares to be issued carry voting power exceeding 30% of the voting power of the shares in issue immediately before the issue, and under the JSE Listings Requirements because Shareholder A, holding 36%, is a related party. Both should be considered, but neither displaces the board authorisation the procedure omits.</td></tr>
+            <tr><td class="disagree"><strong>A4</strong></td><td>Incorrect. Performing the liquidity, solvency and cash flow analysis is management's responsibility, not ours. Management is required to assess the Company's ability to continue as a going concern, and our responsibility under ISA 570 is to obtain sufficient appropriate audit evidence about, and to conclude on, the appropriateness of management's use of the going concern basis — which means evaluating management's assessment, the basis on which it was prepared and the reasonableness of its assumptions. Performing our own assessment in place of management's would assume a management responsibility and create a self-review threat to our independence.</td></tr>
+            <tr><td class="disagree"><strong>A5</strong></td><td>Incorrect. The conversion takes place after 30 June 2026 and, on the information available, has not yet been agreed. It is a non-adjusting event after the reporting period, so the loan balance at year-end is unaffected by it and would correctly <em>not</em> be nil. A procedure designed to confirm a nil balance would lead us to challenge a correctly stated balance, and would miss the work that is actually required, which relates to disclosure and to the going concern assessment.</td></tr>
+            <tr><td class="disagree"><strong>A6</strong></td><td>Incorrect, for two reasons. First, as with A5, the share issue occurs after the reporting date, so the share capital balance in the statement of financial position and in the statement of changes in equity at 30 June 2026 is not affected by it. Second, share certificates evidence individual holdings and cannot support the total share capital balance; the securities register maintained under section 50 of the Companies Act is the appropriate record for that purpose.</td></tr>
+            <tr><td class="agree"><strong>B1</strong></td><td><strong>Correct.</strong> Inspecting the amended loan agreement for its terms and for the signatures of authorised representatives is appropriate and is well directed here, because it is the precise wording of the deferral condition that determines whether the deferral is within the Company's control — which in turn affects both the going concern conclusion and whether the loan is properly classified as current or non-current.</td></tr>
+            <tr><td class="disagree"><strong>B2</strong></td><td>Incorrect. Board minutes, approved budgets and cash flow forecasts are all internally generated by the party whose assumptions are being challenged, so they cannot corroborate those assumptions. Under ISA 500, the reliability of audit evidence is greater when it is obtained from independent sources outside the entity. Whether and when the market value of the Company's liabilities will exceed the market value of its assets is a forward-looking market-based question, and evaluating management's assumptions about it requires external evidence — diamond price and market forecasts, and, given the valuation judgement involved, consideration of whether an auditor's expert is needed under ISA 620.</td></tr>
+            <tr><td class="disagree"><strong>B3</strong></td><td>Incorrect. Enquiry alone does not provide sufficient appropriate audit evidence, and this enquiry is directed at the very party whose commitment is being tested, so it is neither independent nor free of incentive — Shareholder B has every reason to describe its own capacity favourably. A response of this kind must be corroborated with objective evidence of Shareholder B's financial position, together with direct written confirmation of the commitment and the legally binding amended agreement.</td></tr>
+            <tr><td class="disagree"><strong>B4</strong></td><td>Incorrect, in three respects.<br/>• <strong>The assumption is not supportable.</strong> The deferral only operates for as long as the market value of liabilities exceeds that of assets. Assuming that no repayments will be made for a full twelve months substitutes a fixed assumption for the estimate that management is required to make about how long that condition will persist, and that estimate is what we should be evaluating.<br/>• <strong>It assumes a management responsibility.</strong> As with A4, assessing cash flow, liquidity and solvency is management's role; ours is to evaluate the assessment management has performed.<br/>• <strong>The period is measured from the wrong date.</strong> In terms of IAS 1, and consistently with ISA 570, the going concern assessment covers a period of at least twelve months from the <em>end of the reporting period</em>, not from the date of approval of the financial statements.</td></tr>
+          </tbody>
+        </table>
+
+        <p class="kicker" id="h-f4">Working Paper Review Template (completed) — Working Paper F4</p>
+        <table>
+          <thead><tr><th style="width:8%">Error</th><th>Explanation</th></tr></thead>
+          <tbody>
+            <tr><td><strong>1</strong></td><td><strong>A material uncertainty has been equated with a conclusion that the Company cannot continue as a going concern.</strong> The paragraph states that the events and conditions indicate a material uncertainty and then that "we believe the company cannot continue as a going concern". Those are different conclusions, and the second does not follow from the first. A material uncertainty exists when events or conditions have been identified that <em>may cast significant doubt</em> on the entity's ability to continue as a going concern — doubt, not a determination that it will fail. Our preliminary assessment is that management has failed to disclose that uncertainty, not that the Company is unable to continue. As drafted the paragraph also contradicts itself, because a belief that the Company cannot continue would call for a different opinion entirely.</td></tr>
+            <tr><td><strong>2</strong></td><td><strong>The reason for the qualification is incompletely described.</strong> Management's note acknowledges the financial challenges but neither states that a material uncertainty exists nor discloses the plans it has in place to deal with it. ISA 570 requires disclosure of both the principal events or conditions and management's plans to address them. The paragraph should identify specifically what has been omitted, so that a reader can understand the nature of the misstatement rather than being left to infer it.</td></tr>
+            <tr><td><strong>3</strong></td><td><strong>The paragraph asserts that the financial statements do not comply with the going concern basis of accounting.</strong> That is a different — and far more serious — finding than the one we have made, and it is inconsistent with a qualified opinion. We have not concluded that management's use of the going concern basis is inappropriate; had we done so, ISA 570 would require an <em>adverse</em> opinion regardless of whether the matter was disclosed. What we have concluded is that a required disclosure is inadequate, which is a material misstatement that is not pervasive, and that is what supports a qualification. The paragraph must distinguish between the two.</td></tr>
+            <tr><td><strong>4</strong></td><td><strong>The reference to a contravention of sections 29 and 30 of the Companies Act does not belong in this paragraph.</strong> The Basis for Qualified Opinion section explains the matter giving rise to the modification of our opinion on the financial statements. A statutory contravention, if we conclude one has occurred, is dealt with in the "Report on Other Legal and Regulatory Requirements" section, and would separately need to be evaluated as a possible reportable irregularity under the Auditing Profession Act. Including it here confuses the basis for the qualification with a separate reporting responsibility.</td></tr>
+            <tr><td><strong>5</strong></td><td><strong>The opinion itself has been included in the basis paragraph.</strong> Under ISA 700 and ISA 705 the "Qualified Opinion" section comes first, under its own heading, and is followed by the "Basis for Qualified Opinion" section. As drafted the report has no Opinion section at all: the opinion sentence ("except for the effects of the matter described above…") has been absorbed into the basis paragraph, and the two appear in the wrong order.</td></tr>
+            <tr><td><strong>6</strong></td><td><strong>The entity and the applicable financial reporting framework are described inaccurately.</strong> The paragraph refers to "Diamante (Pty) Ltd"; Diamante is a JSE-listed public company, and the same error appears in the working paper header. The framework should be described consistently as IFRS Accounting Standards as issued by the International Accounting Standards Board, together with the requirements of the Companies Act of South Africa. Precision matters in the report itself, where the wording is prescribed.</td></tr>
+            <tr><td><strong>7</strong></td><td><strong>The effects of the misstatement have not been described.</strong> Where a qualification arises from an inadequate disclosure, ISA 705 requires us to describe the omitted information in the Basis for Qualified Opinion section and, unless prohibited by law or regulation, to include the omitted disclosures where it is practicable to do so and we have obtained the information. If it is not practicable, we should say so and explain why. The draft leaves the reader with no indication of what the disclosure should have contained.<br/><span class="note">Not an error, but worth noting: the final sentences dealing with our independence, our ethical responsibilities and the sufficiency and appropriateness of the audit evidence are correctly stated and correctly placed, and should be retained.</span></td></tr>
+          </tbody>
+        </table>
+        <div class="callout info"><strong>One matter for the file that the template does not ask for.</strong> We should record that we considered whether a "Material Uncertainty Related to Going Concern" section is required and concluded that it is not: that section is used where the disclosure of the uncertainty is <em>adequate</em>. Where it is not adequate, the matter is dealt with through a modified opinion, as here. Documenting that we turned our mind to it will save the question being asked on review.</div>
+      </div>
+    </section>
+    <!-- ===================== LESSONS ===================== -->
+    <section id="lessons" class="card">
+      <h2>Marker calibration — what "Competent" required, task by task</h2>
+      <p>Drawn from the examiners' comments on this paper. Read this before you attempt the next case: the pattern of what markers reward is far more stable than the technical content of any one exam.</p>
+      <table>
+        <thead><tr><th style="width:7%">Task</th><th style="width:10%">Difficulty</th><th style="width:41%">What a Competent answer had to do</th><th style="width:42%">Where candidates lost it</th></tr></thead>
+        <tbody>
+          <tr><td>(a)</td><td><span class="pill easy">Easy</span></td><td>Identify most of the correct and incorrect aspects of Contract 1; apply the majority of the given facts to the control indicators for Contract 2 and conclude.</td><td>Working through all five revenue-recognition steps when nothing asked for them; defining "revenue" and "contract"; saying revenue can only be recognised when payment is made — treated as a fundamental error, because it abandons the accrual basis.</td></tr>
+          <tr><td>(b)</td><td><span class="pill med">Medium</span></td><td>Address all three transactions, and either give sound and complete answers to at least two, or sound but incomplete answers to all three.</td><td>Jumping to "held for sale" without justifying it against the criteria and the dates given; confusing joint operations with joint ventures, or treating KT as a non-controlling interest; writing about rehabilitation and impairment on Transaction 3 while never addressing the proposed <em>employee cost</em> treatment.</td></tr>
+          <tr><td>(c)</td><td><span class="pill med">Medium</span></td><td>Identify the core issue with most of the five KPIs, then give at least two valid new KPIs aligned to strategy — specific, measurable and explained.</td><td>Reviewing the KPIs as five independent items instead of as a set; generic criticism instead of Diamante-specific reasoning; missing the obvious (the examiners' phrase was spotting "buck in the bushes" but missing the rhino in the road); recommending things that were not really KPIs, or listing them with no explanation.</td></tr>
+          <tr><td>(d)</td><td><span class="pill easy">Easy</span></td><td>Use the grade profile to get expected value per carat, revenue and contribution for both blocks; apply relevant costing to the sunk fee and the drill rig; give board-level qualitative factors and a clear recommendation that follows from your own analysis.</td><td>Building NPV and IRR models that were not asked for and cost time elsewhere; mixing up or omitting relevant costing — the weakest area in the whole task; and, most avoidably, never reaching a clear recommendation.</td></tr>
+          <tr><td>(e)</td><td><span class="pill med">Medium</span></td><td>Identify and explain more than one key ethical or governance concern; apply King IV/King V, section 76 or another framework to the facts; explain the impact on at least two stakeholder groups; recommend clearly that the campaign not be approved as it stands.</td><td>Oversimplifying and missing the competing considerations; identifying issues without explaining why they were problematic <em>here</em>; naming a framework without applying it; generic stakeholder analysis, or only one stakeholder group.</td></tr>
+          <tr><td>(f)</td><td><span class="pill hard">Difficult</span></td><td>Identify the core issue for each loan — a section 19 debt benefit for A, a section 8F hybrid debt instrument for B; explain the consequences that actually flow from each; and request information genuinely needed to quantify the risk.</td><td>Pattern-matching to the topic instead of the provision: reaching for section 24J, section 23M, transfer pricing or withholding tax for Shareholder B. Defaulting to the simple debt-benefit formula and missing that A's existing shareholding changes the measurement. Missing both reliefs. Information requests so vague ("share value", "loan details") that they demonstrated no underlying calculation.</td></tr>
+          <tr><td>(g)</td><td><span class="pill med">Medium</span></td><td>Show you understand the process; identify and explain multiple genuine weaknesses; recommend practical, realistic controls; apply them to the scenario and communicate professionally.</td><td>Not explaining the weakness — naming it without the root cause or what could go wrong; restating the process instead of translating it into a weakness; generic controls not linked to any weakness; vague recommendations ("use CCTV") with no who, where, how or why; ignoring the stated objective of using technology and the ERP.</td></tr>
+          <tr><td>(h)</td><td><span class="pill hard">Difficult</span></td><td>Confirm A1 and B1 are correct without inventing criticism; identify the evidentiary flaws in the rest; recognise the management-versus-auditor responsibility point in <em>both</em> A4 and B4; identify the material-uncertainty conceptual flaw in F4; use the template.</td><td>Conflating a material uncertainty with an inability to continue; proposing new procedures when the instruction said to critique only what was given; treating the arrangements as effective at year-end; getting the company-law authorisation route wrong; applying the management-versus-auditor principle in one of A4/B4 but not the other.</td></tr>
+        </tbody>
+      </table>
+
+      <h3>The transferable lessons</h3>
+      <div class="two-col">
+        <div class="callout danger"><strong>Scope discipline.</strong> Three of the eight tasks were lost mainly by answering something wider than what was asked — the five-step model in (a), a full DCF in (d), new procedures in (h). Every one of those was explicitly ruled out by the wording on the day. Read the scope sentence twice and write it at the top of your plan.</div>
+        <div class="callout warn"><strong>Always say why.</strong> "The rate is wrong" earns nothing. "The rate is wrong because IAS 21 requires the spot rate at transaction date, so revenue is overstated by R128 000" earns the grade. Attach a <em>because</em> to every point.</div>
+        <div class="callout info"><strong>Say the obvious.</strong> A1 and B1 are correct. Block A's grade data is reliable. The deposit is a contract liability. If you do not write it down, the marker cannot assume you knew it.</div>
+        <div class="callout success"><strong>Close the loop.</strong> An analysis without a recommendation, or a list of factors without a conclusion, is an incomplete task. Where the numbers are close, say so, and then say what you would do anyway — and why.</div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<footer>
+  Worked answers to the UCT APC Professional Programme 2026 1st Qualifying Exam (Diamante Ltd). Diamante is a fictitious entity created for assessment purposes.<br/>
+  Prepared for exam preparation purposes. Educational use only.
+</footer>
+
+<script>
+function toggleAll(open){
+  document.querySelectorAll('details').forEach(d => d.open = open);
+}
+const sections = document.querySelectorAll('section[id], h3[id]');
+const links = document.querySelectorAll('nav.toc a');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(sec => {
+    const top = sec.getBoundingClientRect().top;
+    if(top < 120) current = sec.id;
+  });
+  links.forEach(l => {
+    l.style.background = '';
+    l.style.borderLeftColor = 'transparent';
+    if(l.getAttribute('href') === '#'+current){
+      l.style.background = 'var(--soft)';
+      l.style.borderLeftColor = 'var(--accent)';
+    }
+  });
+});
+</script>
+
+</body>
+</html>
