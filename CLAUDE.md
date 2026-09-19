@@ -24,6 +24,7 @@ research and exam technique.
 | `apc-playbook.html` | The method, on one readable page: pre-release period, day plan, answering approach, formats |
 | `APC-2026-September-Axion-Pre-release-Triggers.docx` | September QE (Axion) trigger list and group research plan |
 | `APC-2026-September-Axion-Triggers-MEETING.docx` | Condensed meeting version — grid only, point → insight |
+| `research/` | Per-trigger research files for the September QE (Axion) |
 | `templates/APC-Prerelease-Triggers-BLANK.docx` | Blank pre-release trigger list, page-by-page grid |
 | `.claude/skills/apc/` | The same knowledge in skill form — invoke with `/apc` |
 
