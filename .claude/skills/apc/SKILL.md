@@ -45,6 +45,11 @@ Detailed guidance lives in the reference files:
   to force breadth when unpacking a trigger.
 - `references/case-history.md` — what has actually been asked, by task and discipline,
   across past APC papers and this programme's mocks.
+- `references/axion-research-pack.md` — the study group's 1 032-page research pack for the
+  September 2026 QE: its trigger map, the facts and figures it establishes, and the
+  FACT → WHY → PRINCIPLE → APPLICATION → CONSEQUENCE → RECOMMENDATION answering formula it
+  uses. Read before adding to the Axion research, so new work extends the pack rather than
+  repeating it.
 
 ## The answering approach — apply every time
 
